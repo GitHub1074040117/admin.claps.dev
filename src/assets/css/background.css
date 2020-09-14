@@ -1,0 +1,26 @@
+.background {
+    min-height: 99vh;
+    text-align: center;
+}
+
+.button-b {
+    background: green;
+    width: 100%;
+    border: 2px solid green;
+    border-radius: 30px;
+    cursor: pointer;
+    /*按钮高度*/
+    padding: 15px 0;
+
+    font-size: 15px;
+    font-weight: 100;
+    color: white;
+    margin-top: 50px;
+}
+
+.button-b:hover {
+    transition-duration: 0.4s;
+    color: black;
+    background-color: white;
+}
+

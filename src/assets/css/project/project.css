@@ -1,0 +1,131 @@
+.container-project {
+    text-align: center;
+}
+.panel-main-project {
+    width: 90%;
+    min-width: 350px;
+    min-height: 90vh;
+    background-color: white;
+    display: inline-block;
+    text-align: left;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+}
+
+.panel-upper-project {
+    width: 80%;
+    display: inline-block;
+    margin: 10px 10%;
+}
+
+.panel-upper-project .legend-table {
+    width: 100%;
+    height: 45px;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 400;
+    padding: 20px 0;
+    margin-bottom: 10px;
+    border-bottom: 1px solid black;
+}
+
+.panel-upper-project button {
+    height: 50px;
+    width: 100%;
+    float: right;
+    margin: 10px auto;
+
+    background-color: green;
+    border: 2px solid green;
+    cursor: pointer;
+
+    font-size: 1em;
+    font-weight: 200;
+    letter-spacing: 1px;
+    color: white;
+    border-radius: 30px;
+}
+
+.panel-upper-project button:hover {
+    background-color: white;
+    color: black;
+    transition-duration: 0.4s;
+}
+
+.panel-upper-project .input {
+    padding: 0 15px;
+    margin: 10px;
+    background-color: white;
+    float: right;
+    display: inline-block;
+}
+
+.panel-upper-project .input input {
+    width: 150px;
+    height: 50px;
+    margin-right: 20px;
+    border: none;
+    outline: none;
+    padding-left: 30px;
+    padding-right: 80px;
+    border-radius: 4px;
+}
+
+.panel-content-project {
+    width: 80%;
+    display: inline-block;
+    margin: 10px 10%;
+}
+
+.box-project-upper {
+    width: 90%;
+    margin: 5px 5%;
+    display: inline-block;
+}
+
+/*项目图标*/
+.box-project-upper img {
+    margin-right: 20px;
+    border-radius: 24px;
+    background-color: darkgrey;
+    text-align: center;
+    font-size: 32px;
+    max-width: 48px;
+    max-height: 48px;
+    /*设置元素向下对齐*/
+    vertical-align: bottom;
+}
+
+/*项目名称*/
+.box-project-upper span {
+    position: relative;
+    top: -10px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 28px;
+}
+
+/*项目描述*/
+.box-project-upper p {
+    font-size: 14px;
+    line-height: 20px;
+    color: #6F767C;
+    margin: 0;
+}
+
+
+
+.box-project-lower {
+    width: 90%;
+    margin: 0 5%;
+}
+
+.box-project-lower .project-total {
+    font-size: 16px;
+    font-weight: 300;
+    color: #00A3FF;
+    margin: 5px;
+    position: relative;
+}
+

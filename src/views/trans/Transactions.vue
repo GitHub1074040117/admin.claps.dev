@@ -1,0 +1,83 @@
+<template>
+    <div style="max-width: 80vw; margin: 40px auto" onload="updateTransactions()">
+        <v-card>
+            <v-card-title>
+                Transactions
+                <v-spacer></v-spacer>
+                <v-text-field
+                        v-model="search"
+                        append-icon="mdi-magnify"
+                        label="Search"
+                        single-line
+                        hide-details
+                ></v-text-field>
+            </v-card-title>
+            <v-data-table
+                    :headers="headers"
+                    :items="Transactions"
+                    :search="search"
+            ></v-data-table>
+        </v-card>
+    </div>
+</template>
+
+<script>
+    import transService from "../../service/transService";
+
+    export default {
+        name: "Transactions",
+        data() {
+            return {
+                search: '',
+                headers: [
+                    {
+                        text: 'Project Name',
+                        align: 'start',
+                        sortable: false,
+                        value: 'project_id',
+                    },
+                    { text: 'Asset Id', value: 'asset_id' },
+                    { text: 'Amount ($)', value: 'amount' },
+                    { text: 'Sender', value: 'sender' },
+                    { text: 'Receiver', value: 'receiver' },
+                    { text: 'Created At', value: 'created_at' },
+                ],
+                Transactions: [{
+                    amount: "",
+                    sender: "",
+                    receiver: "",
+                    created_at: "",
+                    asset_id: "",
+                    project_id: "",
+                    id: "",
+                }],
+            };
+        },
+
+        mounted: function() {
+            this.updateTransactions();
+        },
+
+        methods: {
+            // 进入页面装载捐献记录
+            updateTransactions() {
+                // 获取项目捐赠流水记录
+                transService.getAllTransactions().then((res) => {
+                    console.log("获取的流水列表:", res.data.data);
+                    if (res.data.code !== 200) {
+                        alert(res.data.msg);
+                    } else {
+                        this.Transactions = res.data.data.Transactions;
+                    }
+                }).catch((err) => {
+                    alert("获取捐赠流水时出错！" + err);
+                });
+            },
+        },
+
+    }
+</script>
+
+<style scoped>
+
+</style>

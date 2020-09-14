@@ -1,0 +1,218 @@
+.container-pd {}
+.panel-main-pd {
+    margin: 0 auto;
+    width: 80vw;
+    min-width: 900px;
+    background-color: #eeeeee;
+}
+
+.panel-upper-pd {
+    width: 90%;
+    padding: 0 5%;
+    display: inline-block;
+    text-align: left;
+}
+
+.panel-lower-pd {
+    width: 100%;
+    display: inline-block;
+    text-align: left;
+}
+
+.panel-upper-pd .panel-legend-pd {
+    width: 100%;
+    margin-top: 20px;
+    border-bottom: 1px solid black;
+    padding: 10px 0;
+    margin-bottom: 5px;
+}
+
+.panel-legend-pd .legend-pd {
+    width: 60%;
+    height: 45px;
+    font-size: 25px;
+    font-weight: 400;
+    display: inline-block;
+}
+.panel-upper-pd .panel-project-info {
+    width: 96%;
+    margin: 20px 2%;
+    display: inline-block;
+}
+/*项目图标*/
+.panel-project-info img {
+    margin-right: 20px;
+    border-radius: 24px;
+    background-color: darkgrey;
+    text-align: center;
+    font-size: 32px;
+    max-width: 48px;
+    max-height: 48px;
+    /*设置元素向下对齐*/
+    vertical-align: bottom;
+}
+
+/*项目名称*/
+.panel-project-info span {
+    position: relative;
+    top: -10px;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 20px;
+    line-height: 28px;
+}
+
+/*项目描述*/
+.panel-project-info p {
+    font-size: 16px;
+    line-height: 20px;
+    color: #6F767C;
+    margin: 0;
+}
+
+/*删除按钮样式*/
+.button-delete-project {
+    background: red;
+    color: white;
+    border-radius: 30px;
+    width: 200px;
+    cursor: pointer;
+    /*按钮高度*/
+    padding: 10px 0;
+    border: 2px solid red;
+    font-size: 15px;
+    font-weight: 200;
+    display: block;
+    float: right;
+}
+
+.button-delete-project:hover {
+    color: black;
+    background-color: white;
+    transition-duration: 0.4s;
+}
+
+
+
+
+.panel-lower-pd .panel-tab-pd {
+    width: 100%;
+    height: 71px;
+    margin: 0 auto;
+}
+
+.panel-tab-pd input[name="project-tab"] {
+    left: -9999px;
+    right: -9999px;
+    position: absolute;
+}
+
+.panel-tab-pd input[name="project-tab"]:checked+label {
+    background-color: green;
+    color: white;
+}
+
+.panel-tab-pd input[name="project-tab"]:checked~article {
+    display: inline-block;
+}
+
+.panel-tab-pd .tab-section {
+    display: inline-block;
+    width: 50%;
+    height: 60px;
+}
+
+.panel-tab-pd .tab-section label[name="label-tab"] {
+    background-color: white;
+    color: black;
+    display: block;
+    cursor: pointer;
+    height: 51px;
+    width: 90%;
+    padding-top: 20px;
+    font-weight: 300;
+    font-size: 18px;
+    text-align: center;
+}
+
+.panel-tab-pd .tab-section label[name="label-tab"]:hover {
+    background-color: green;
+    color: white;
+    transition-duration: 0.4s;
+    opacity: 90%;
+}
+
+.panel-tab-pd .tab-section article[id="art1"] {
+    float: left;
+    display: none;
+    position: relative;
+
+    background-color: #eeeeee;
+    width: 80vw;
+    min-width: 900px;
+    min-height: 350px;
+}
+
+.panel-tab-pd .tab-section article[id="art2"] {
+    float: right;
+    display: none;
+    position: relative;
+
+    background-color: #eeeeee;
+    width: 80vw;
+    min-width: 900px;
+    min-height: 350px;
+}
+
+.panel-tab-pd form {
+    width: 100%;
+    background-color: #eeeeee;
+    display: inline-block;
+}
+
+.panel-middle-pd {
+    display: inline-block;
+    background-color: white;
+    width: 90%;
+    margin: 0 5% 3%;
+    min-height: 300px;
+}
+/*输入框样式*/
+.panel-middle-pd .input-pd {
+    margin: 20px 10%;
+    width: 80%;
+    display: inline-block;
+    background: #eeeeee;
+}
+.panel-middle-pd .input-pd input {
+    width: 90%;
+    padding: 0 5%;
+    height: 55px;
+    display: inline;
+    /*边框颜色:无*/
+    border: none;
+    outline: none;
+    background: transparent;
+}
+/*添加按钮样式*/
+.panel-middle-pd .button-add-pd {
+    background: green;
+    width: 80%;
+    cursor: pointer;
+    /*按钮高度*/
+    padding: 15px 0;
+    border: 2px solid green;
+    font-size: 15px;
+    font-weight: 100;
+    color: white;
+    margin: 30px 10%;
+    border-radius: 20px;
+}
+
+.button-add-pd:hover {
+    transition-duration: 0.4s;
+
+    background-color: white;
+    color: #000;
+    opacity: 0.8;
+}

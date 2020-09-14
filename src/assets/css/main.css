@@ -1,0 +1,119 @@
+
+.panel-userInfo-upper {
+    width: 100vw;
+    height: 65px;
+    margin: 10px 0;
+    color: black;
+    background-color: white;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+}
+
+.panel-userInfo-upper .userInfo-name {
+    margin: 10px 10px;
+    padding: 7px 15px;
+    border-left: 1px solid black;
+    width: 100px;
+    font-weight: 100;
+    font-size: 18px;
+    float: right;
+}
+
+.panel-userInfo-upper .userInfo-item {
+    margin: 10px 5px;
+    padding: 7px 0 7px 40px;
+    border-left: 1px solid black;
+    width: 100px;
+    font-weight: 100;
+    font-size: 18px;
+    float: right;
+    cursor: pointer;
+}
+
+.panel-userInfo-upper .userInfo-item:hover {
+    opacity: 70%;
+}
+
+.panel-userInfo-upper img {
+    width: 30px;
+    height: 30px;
+    margin: 15px;
+    color: white;
+    font-weight: 100;
+    font-size: 15px;
+    float: right;
+    border-radius: 1000px;
+}
+
+
+.panel-middle {
+    background-color: white;
+    margin: 50px 0;
+    width: 100vw;
+    min-width: 350px;
+    text-align: center;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+}
+
+.panel-middle-vertical {
+    width: 250px;
+    margin: 25px;
+    display: inline-block;
+    text-align: left;
+}
+
+.panel-middle-vertical .panel-middle-lower-inner {
+    width: 250px;
+    display: inline-block;
+    float: right;
+}
+
+.panel-middle-lower-inner p {
+    display: block;
+    width: 200px;
+    font-weight: 100;
+    font-size: 16px;
+    padding-top: 20px;
+    float: right;
+    border-top: 1px solid black;
+}
+
+/*按钮样式设计*/
+.panel-middle-vertical .button-enter {
+    background: green;
+    width: 250px;
+    height: 250px;
+    display: inline-block;
+
+    border: 3px solid green;
+    cursor: pointer;
+    /*按钮高度*/
+
+    font-size: 20px;
+    font-weight: 500;
+    letter-spacing: 5px;
+    color: white;
+    margin: 25px 25px;
+    /*设置圆角按钮*/
+    border-radius: 24px;
+
+    float: top;
+}
+
+/*鼠标悬停在按钮上的样式*/
+.button-enter:hover {
+    background-color: white;
+    color: black;
+    /*悬停转变时间*/
+    transition-duration: 0.4s;
+}
+
+/*图标样式*/
+button.button-enter span {
+    display: block;
+    font-size: 50px;
+    margin-bottom: 15px;
+}
+
+

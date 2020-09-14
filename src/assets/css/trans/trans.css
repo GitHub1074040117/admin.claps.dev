@@ -1,0 +1,115 @@
+.container-trans {
+    text-align: center;
+}
+.panel-main-trans {
+    margin: 0 auto;
+    width: 80vw;
+    min-width: 900px;
+    background-color: #eeeeee;
+}
+
+.panel-upper-trans {
+    width: 100%;
+    display: inline-block;
+    text-align: left;
+}
+
+.panel-lower-trans {
+    width: 100%;
+    display: inline-block;
+    text-align: left;
+}
+
+.panel-upper-trans .legend-trans {
+    width: 100%;
+    height: 45px;
+    text-align: center;
+    font-size: 25px;
+    font-weight: 400;
+    padding: 20px 0;
+    margin-bottom: 50px;
+    border-bottom: 1px solid black;
+}
+
+.panel-lower-trans .panel-tab-trans {
+    width: 100%;
+    height: 71px;
+    margin: 0 auto;
+    background-color: white;
+}
+
+.panel-tab-trans input[name="trans-tab"] {
+    left: -9999px;
+    right: -9999px;
+    position: absolute;
+}
+
+.panel-tab-trans input[name="trans-tab"]:checked+label {
+    background-color: green;
+    color: white;
+}
+
+.panel-tab-trans input[name="trans-tab"]:checked~article {
+    display: inline-block;
+}
+
+.panel-tab-trans .tab-section {
+    display: inline-block;
+    width: 50%;
+    height: 60px;
+}
+
+.panel-tab-trans .tab-section label {
+    background-color: white;
+    color: black;
+    display: block;
+    cursor: pointer;
+    height: 51px;
+    width: 100%;
+    padding-top: 20px;
+    font-weight: 300;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.panel-tab-trans .tab-section label:hover {
+    background-color: green;
+    color: white;
+    transition-duration: 0.4s;
+    opacity: 90%;
+}
+
+.panel-tab-trans .tab-section article[id="art1"] {
+    float: left;
+    display: none;
+    position: relative;
+
+    background-color: #eeeeee;
+    width: 80vw;
+    min-width: 900px;
+    min-height: 400px;
+}
+
+.panel-tab-trans .tab-section article[id="art2"] {
+    float: right;
+    display: none;
+    position: relative;
+
+    background-color: #eeeeee;
+    width: 80vw;
+    min-width: 900px;
+    min-height: 400px;
+}
+
+.panel-tab-trans form {
+    width: 100%;
+    display: inline-block;
+}
+
+.panel-middle-trans {
+    display: inline-block;
+    background-color: white;
+    width: 100%;
+    min-height: 400px;
+}
+
