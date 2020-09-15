@@ -9,16 +9,16 @@
             An Error occurred when tried to connect with github.com! Please try again later.
         </v-alert>
         <v-card
-                class="mx-auto"
+                class="mx-auto my-auto"
                 max-width="400"
                 min-height="500"
-                style="position: relative; top: 50px;"
+                style="position: relative; top: 15vh;"
         >
             <v-img
                     class="white--text align-end"
                     height="270px"
                     color="darkgray"
-                    src="https://cdn.vuetifyjs.com/images/cards/house.jpg"
+                    src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
             >
                 <v-card-title>Welcome to admin.claps.dev!</v-card-title>
             </v-img>
@@ -35,8 +35,9 @@
                 <v-spacer></v-spacer>
                 <v-btn
                         color="green"
-                        class="pt-5 pb-5 pr-13 pl-13 mt-8"
+                        class="py-5 pr-13 pl-13 mt-8"
                         id="loginBtn"
+                        style="position: relative; bottom: 10px; height: 50px"
                         @click="thirdPartyAuth()"
                         text
                         :disabled="btnDisabled"
@@ -94,7 +95,8 @@
                     this.btnDisabled = false;
                 }).catch(() => {
                     linear.style.display="none";
-                    alert("跳转到github登录页面出错！");
+                    this.tipAble = true;
+                    this.btnDisabled = true;
                 });
             },
 
@@ -125,7 +127,7 @@
                     let Token = res.data.data.Token;
                     // 本地储存用户信息和Token
                     this.$store.dispatch('userModule/storeUserInfo', {User, Token});
-                    this.$router.replace({ name: 'main' });
+                    this.$router.replace({ name: 'home' });
                     // 恢复按钮
                     linear.style.display="none";
                     this.btnDisabled = false;

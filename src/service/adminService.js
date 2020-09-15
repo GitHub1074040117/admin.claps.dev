@@ -7,17 +7,17 @@ const getAdminTable = () => {
 };
 
 // 发送要删除的管理员信息
-const deleteAdmin = ({account}) => {
-    return request.post('admin/delete', {account});
+const deleteAdmin = (email) => {
+    return request.post('admin/delete', {email});
 };
 
 // 发送新创建的管理员信息
-const addNewAdmin = ({name, account, role, avatarUrl}) => {
-    return request.post('admin/add', {name, account, role, avatarUrl});
+const addNewAdmins = (admins) => {
+    return request.post('addAdmins', {admins});
 };
 
 export default {
     getAdminTable,
     deleteAdmin,
-    addNewAdmin,
+    addNewAdmins,
 };
