@@ -32,6 +32,14 @@ const projectRouter = [
         component: () => import('../../views/project/AddRepository.vue')
     },
     {
+        path: '/project/:name/transact',
+        name: 'projectTransaction',
+        meta: {
+            auth: true,
+        },
+        component: () => import('../../views/project/ProjectTransaction.vue')
+    },
+    {
         path: '/projects/addProject',
         name: 'addProject',
         meta: {

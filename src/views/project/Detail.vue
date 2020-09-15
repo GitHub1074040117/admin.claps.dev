@@ -59,181 +59,152 @@
             </div>
         </template>
         <br>
-        <div style="max-width: 450px; display: inline-block; margin: 5px;">
+        <div style="float: left; max-width: 450px; display: inline-block; margin: 5px;">
             <!-- Member List -->
-            <template>
-                <v-card
-                        min-width="450"
-                        class="mx-auto float-left"
-                        v-if="showMembers"
-
-                >
-                    <v-list three-line>
-                        <template v-for="(member, index) in Members">
-                            <v-subheader
-                                    v-if="index === 0"
-                                    :key="index"
-                                    v-text="'MEMBERS'"
-                            ></v-subheader>
-
-                            <v-divider
-                                    v-if="index !== 0"
-                                    :key="index"
-                                    :inset="true"
-                            ></v-divider>
-                            <v-list-item
-
-                                    :key="index"
-                            >
-                                <v-list-item-avatar>
-                                    <v-img :src="member.avatar_url"></v-img>
-                                </v-list-item-avatar>
-
-                                <v-list-item-content>
-                                    <v-list-item-title v-html="member.name"></v-list-item-title>
-                                    <v-list-item-subtitle v-html="member.email"></v-list-item-subtitle>
-                                    <v-list-item-subtitle v-html="member.mixin_id"></v-list-item-subtitle>
-                                </v-list-item-content>
-                                <v-menu
-                                        bottom
-                                        origin="center center"
-                                        transition="scale-transition"
-                                        class="float-right"
-                                >
-                                    <template v-slot:activator="{ on, attrs }">
-                                        <v-btn
-                                                color="green"
-                                                text
-                                                dark
-                                                v-bind="attrs"
-                                                v-on="on"
-                                        >
-                                            MORE
-                                        </v-btn>
-                                    </template>
-
-                                    <v-list>
-                                        <v-list-item @click.stop="deleteMember" :id="member.id">
-                                            <v-list-item-content>
-                                                <v-list-item-title class="red--text">Delete</v-list-item-title>
-                                            </v-list-item-content>
-                                        </v-list-item>
-
-                                    </v-list>
-                                </v-menu>
-                            </v-list-item>
-                        </template>
-                    </v-list>
-                </v-card>
-            </template>
-
-            <!-- Repo Table -->
-            <template>
-                <v-card
-                        min-width="450"
-                        class="mx-auto float-left"
-                        v-if="showRepos"
-                        style="margin-top: 35px;"
-                >
-                    <v-list three-line>
-                        <template v-for="(repo, index) in Repos">
-                            <v-subheader
-                                    v-if="index === 0"
-                                    :key="index"
-                                    v-text="'REPOSITORY'"
-                            ></v-subheader>
-
-                            <v-divider
-                                    v-if="index !== 0"
-                                    :key="index"
-                                    :inset="true"
-                            ></v-divider>
-                            <v-list-item
-                                    :key="index"
-                            >
-                                <!--<v-list-item-avatar v-if="this.Project.avatar_url">
-                                    <v-img :src="this.Project.avatar_url"></v-img>
-                                </v-list-item-avatar>-->
-                                <v-list-item-content>
-                                    <v-list-item-title class="blue--text" v-html="repo.name"></v-list-item-title>
-                                    <v-list-item-subtitle v-html="repo.slug"></v-list-item-subtitle>
-                                </v-list-item-content>
-                                <v-menu
-                                        bottom
-                                        origin="center center"
-                                        transition="scale-transition"
-                                        class="float-right"
-                                >
-                                    <template v-slot:activator="{ on, attrs }">
-                                        <v-btn
-                                                color="green"
-                                                text
-                                                dark
-                                                v-bind="attrs"
-                                                v-on="on"
-                                        >
-                                            MORE
-                                        </v-btn>
-                                    </template>
-
-                                    <v-list>
-                                        <v-list-item @click.stop="" :id="repo.id">
-                                            <v-list-item-content>
-                                                <v-list-item-title>View</v-list-item-title>
-                                            </v-list-item-content>
-                                        </v-list-item>
-                                        <v-list-item @click.stop="deleteRepository" :id="repo.id">
-                                            <v-list-item-content>
-                                                <v-list-item-title class="red--text">Delete</v-list-item-title>
-                                            </v-list-item-content>
-                                        </v-list-item>
-                                    </v-list>
-                                </v-menu>
-                            </v-list-item>
-                        </template>
-                    </v-list>
-                </v-card>
-            </template>
-        </div>
-        <!-- chart -->
-        <v-card
-                class="float-right text-center mr-2"
-                color="green"
-                dark
-                min-width="600"
-        >
-            <v-card-text>
-                <v-sheet color="rgba(0, 0, 0, .12)">
-                    <v-sparkline
-                            :value="value"
-                            color="rgba(255, 255, 255, .7)"
-                            height="150"
-                            padding="24"
-                            line-width="2"
-                            stroke-linecap="round"
+            <div>
+                <template>
+                    <v-card
+                            min-width="450"
+                            class="mx-auto float-left"
+                            v-if="showMembers"
 
                     >
-                        <template v-slot:label="item">
-                            ${{ item.value }}
-                        </template>
-                    </v-sparkline>
-                </v-sheet>
-            </v-card-text>
+                        <v-list three-line>
+                            <template v-for="(member, index) in Members">
+                                <v-subheader
+                                        v-if="index === 0"
+                                        :key="index"
+                                        v-text="'MEMBERS'"
+                                ></v-subheader>
 
-            <v-card-text>
-                <div class="display-1 font-weight-thin">Sales Last 24h</div>
-            </v-card-text>
+                                <v-divider
+                                        v-if="index !== 0"
+                                        :key="member.name"
+                                        :inset="true"
+                                ></v-divider>
+                                <v-list-item
+                                        :key="member.id"
+                                >
+                                    <v-list-item-avatar>
+                                        <v-img :src="member.avatar_url"></v-img>
+                                    </v-list-item-avatar>
 
-            <v-divider></v-divider>
+                                    <v-list-item-content>
+                                        <v-list-item-title v-html="member.name"></v-list-item-title>
+                                        <v-list-item-subtitle v-html="member.email"></v-list-item-subtitle>
+                                        <v-list-item-subtitle v-html="member.mixin_id"></v-list-item-subtitle>
+                                    </v-list-item-content>
+                                    <v-menu
+                                            bottom
+                                            origin="center center"
+                                            transition="scale-transition"
+                                            class="float-right"
+                                    >
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-btn
+                                                    color="green"
+                                                    text
+                                                    dark
+                                                    v-bind="attrs"
+                                                    v-on="on"
+                                            >
+                                                MORE
+                                            </v-btn>
+                                        </template>
 
-            <v-card-actions class="justify-center">
-                <v-btn block text>Go to Report</v-btn>
-            </v-card-actions>
-        </v-card>
+                                        <v-list>
+                                            <v-list-item @click.stop="deleteMember" :id="member.id">
+                                                <v-list-item-content>
+                                                    <v-list-item-title class="red--text">Delete</v-list-item-title>
+                                                </v-list-item-content>
+                                            </v-list-item>
 
+                                        </v-list>
+                                    </v-menu>
+                                </v-list-item>
+                            </template>
+                        </v-list>
+                    </v-card>
+                </template>
+            </div>
+
+
+            <!-- Repo Table -->
+            <div>
+                <template>
+                    <v-card
+                            min-width="450"
+                            class="mx-auto float-left"
+                            v-if="showRepos"
+                            style="margin-top: 35px;"
+                    >
+                        <v-list three-line>
+                            <template v-for="(repo, index) in Repos">
+                                <v-subheader
+                                        v-if="index === 0"
+                                        :key="index"
+                                        v-text="'REPOSITORY'"
+                                ></v-subheader>
+
+                                <v-divider
+                                        v-if="index !== 0"
+                                        :key="repo.id"
+                                        :inset="true"
+                                ></v-divider>
+                                <v-list-item
+                                        :key="repo.name"
+                                >
+                                    <!--<v-list-item-avatar v-if="this.Project.avatar_url">
+                                        <v-img :src="this.Project.avatar_url"></v-img>
+                                    </v-list-item-avatar>-->
+                                    <v-list-item-content>
+                                        <v-list-item-title class="blue--text" v-html="repo.name"></v-list-item-title>
+                                        <v-list-item-subtitle v-html="repo.slug"></v-list-item-subtitle>
+                                    </v-list-item-content>
+                                    <v-menu
+                                            bottom
+                                            origin="center center"
+                                            transition="scale-transition"
+                                            class="float-right"
+                                    >
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-btn
+                                                    color="green"
+                                                    text
+                                                    dark
+                                                    v-bind="attrs"
+                                                    v-on="on"
+                                            >
+                                                MORE
+                                            </v-btn>
+                                        </template>
+
+                                        <v-list>
+                                            <v-list-item @click.stop="" :id="repo.id">
+                                                <v-list-item-content>
+                                                    <v-list-item-title>View</v-list-item-title>
+                                                </v-list-item-content>
+                                            </v-list-item>
+                                            <v-list-item @click.stop="deleteRepository" :id="repo.id">
+                                                <v-list-item-content>
+                                                    <v-list-item-title class="red--text">Delete</v-list-item-title>
+                                                </v-list-item-content>
+                                            </v-list-item>
+                                        </v-list>
+                                    </v-menu>
+                                </v-list-item>
+                            </template>
+                        </v-list>
+                    </v-card>
+                </template>
+            </div>
+
+        </div>
+
+        <!-- chart2 -->
         <v-card
-                class="float-right text-center mr-2"
-                min-width="450"
+                class="float-left text-center mt-1 ml-6"
+                min-width="550"
                 min-height="500"
         >
             <v-sheet
@@ -241,32 +212,41 @@
                     color="cyan"
                     elevation="12"
                     max-width="calc(100% - 32px)"
-                    min-height="300"
+                    min-height="330"
             >
                 <v-sparkline
-                        :labels="labels"
                         :value="value"
+                        :labels="labels"
                         color="white"
                         line-width="2"
                         padding="24"
+                        height="180"
+                        auto-draw
                 >
                     <template v-slot:label="item">
-                        ${{ item.value }}
+                        {{ item.value }}
                     </template>
                 </v-sparkline>
             </v-sheet>
 
             <v-card-text class="pt-0">
-                <div class="title font-weight-light mb-2">User Registrations</div>
-                <div class="subheading font-weight-light grey--text">Last Campaign Performance</div>
-                <v-divider class="my-2"></v-divider>
+                <div class="title font-weight-light mb-2">Project Transactions</div>
+                <div class="subheading font-weight-light grey--text">Transactions of {{this.projectName}} in {{this.Month[this.currentMon]}}</div>
                 <v-icon
                         class="mr-2"
                         small
                 >
                     mdi-clock
                 </v-icon>
-                <span class="caption grey--text font-weight-light">last registration 26 minutes ago</span>
+                <span class="caption grey--text font-weight-light">
+                    last update {{ time.getMonth()+1 }}-{{ time.getDate() }}-{{ time.getFullYear() }} {{time.getHours()}}:{{time.getMinutes()}}
+                </span>
+                <v-divider class="my-2"></v-divider>
+                <v-card-actions class="justify-center">
+                    <v-btn text color="green" class="float-left mr-12" id="last-m" @click="changeMonth">Last month</v-btn>
+                    <v-btn text @click="viewProjectTransactions">Go to Report</v-btn>
+                    <v-btn text color="green" class="float-right ml-12" id="next-m" @click="changeMonth">Next month</v-btn>
+                </v-card-actions>
             </v-card-text>
         </v-card>
     </div>
@@ -281,11 +261,13 @@
         name: "Detail",
         data() {
             return {
+                time: new Date(),
                 showMembers: false,
                 showRepos: false,
                 isActive: false,
-                projectId: 0,
                 projectName: '',
+                currentMon: 0,
+                Month: ["" ,"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
                 Members: [
                     {
                         id: "",
@@ -309,26 +291,42 @@
                     avatar_url: "",
                     total: "",
                 },
+                TransCount: "",
+                Transactions: {
+                    id: "",
+                    project_id: "",
+                    asset_id: "",
+                    amount: "",
+                    created_at: "",
+                    sender: "",
+                    receiver: "",
+                },
                 labels: [
-                    '12am',
-                    '3am',
-                    '6am',
-                    '9am',
-                    '12pm',
-                    '3pm',
-                    '6pm',
-                    '9pm',
+                    '1-4',
+                    '5-8',
+                    '9-12',
+                    '13-16',
+                    '17-20',
+                    '21-24',
+                    '25-28',
+                    '29-31',
                 ],
-                value: [
-                    200,
-                    675,
-                    410,
-                    390,
-                    310,
-                    460,
-                    250,
-                    240,
+                TransMonthly: [
+                    { amounts: [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],},
+                    { amounts: [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],},
+                    { amounts: [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],},
+                    { amounts: [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],},
+                    { amounts: [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],},
+                    { amounts: [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],},
+                    { amounts: [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],},
+                    { amounts: [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],},
+                    { amounts: [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],},
+                    { amounts: [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],},
+                    { amounts: [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],},
+                    { amounts: [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],},
+                    { amounts: [0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0],},
                 ],
+                value: [],
             };
         },
         mounted: function() {
@@ -338,15 +336,19 @@
             // 进入页面自动更新项目的成员、仓库和钱包
             updateProjectDetail() {
                 // 获取项目id
-                this.projectId = this.$route.query.projectId;
                 this.projectName = this.$route.params.name;
                 // 由项目id获取项目
                 projectService.getProjectByName(this.projectName).then((res) => {
                     if (res.data.code !== 200) {
-                        alert(res.data.msg);
+                        alert("获取项目失败！");
                     } else {
                         this.Project = res.data.data.Project;
-                        console.log("获取的项目信息：",this.Project);
+                        this.Transactions = res.data.data.Transactions;
+                        this.calculateTransMonthly(this.Transactions);
+                        this.currentMon = this.time.getMonth() + 1;
+                        this.value = this.TransMonthly[this.currentMon].amounts;
+                        console.log(this.TransMonthly);
+                        this.TransCount = res.data.data.Count;
                     }
                 }).catch((err) => {
                     alert("获取项目时出错！" + err);
@@ -354,7 +356,6 @@
 
                 // 获取项目成员表单
                 memberService.getProjectMember(this.projectName).then((res) => {
-                    console.log("获取的成员列表:", res.data.data);
                     if (res.data.code !== 200) {
                         return null;
                     } else {
@@ -367,7 +368,6 @@
 
                 // 获取项目仓库表单
                 repositoryService.getProjectRepo(this.projectName).then((res) => {
-                    console.log("获取的项目仓库信息：", res.data.data);
                     if (res.data.code !== 200) {
                         return null;
                     } else {
@@ -453,6 +453,36 @@
                 }).catch((err) => {
                     alert("删除仓库时出错！" + err)
                 });
+            },
+
+            // 为图表计算每月受捐记录
+            calculateTransMonthly(transactions) {
+                  for (let i = 0; i < transactions.length; i++) {
+                      let dateStr = transactions[i].created_at;
+                      let month = parseInt(dateStr.substring(5, 7));
+                      let date = parseInt(dateStr.substring(8, 10));
+                      this.TransMonthly[month].amounts[Math.floor((date-1) / 4)] += parseFloat(transactions[i].amount);
+                      //console.log(this.TransMonthly[month-1].amounts[0])
+                  }
+            },
+
+            // 查看捐赠流水
+            viewProjectTransactions() {
+                this.$router.push({ name: 'projectTransaction', params: {'name': this.projectName} });
+            },
+
+            // 改变月份
+            changeMonth(event) {
+                const t = event.currentTarget.id;
+                let m = parseInt(this.currentMon);
+                if (t === 'last-m') {
+                    m - 1 < 1 ? m = 12 : m = m - 1;
+                }
+                else {
+                    m + 1 > 12 ? m = 1 : m = m + 1;
+                }
+                this.value = this.TransMonthly[m].amounts;
+                this.currentMon = m;
             },
 
         },

@@ -43,15 +43,14 @@ router.beforeEach((to, from, next) => {
 
   if (to.meta.auth) {
     // 判断用户是否登录, token是否存在
-    console.log("用户的token信息：" + store.state.userModule.token);
     if (store.state.userModule.token) {
       next();
     } else {
       // 否则跳转登录
-      /*alert("您还未登录！请先登录");
+      alert("您还未登录！请先登录");
       router.push({name: "login"}).then(r => {
         console.log(r.meta)
-      });*/
+      });
       next();
     }
   } else { // 不需要则通过
