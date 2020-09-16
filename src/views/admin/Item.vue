@@ -21,7 +21,7 @@
 </template>
 
 <script>
-    import adminService from "../../../service/adminService";
+    import adminService from "../../service/adminService";
 
     export default {
         name: "Item",
@@ -57,5 +57,5 @@
 </script>
 
 <style scoped>
-    @import "../../../assets/css/item.css";
+    @import "../../assets/css/item.css";
 </style>

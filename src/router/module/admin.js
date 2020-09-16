@@ -14,7 +14,15 @@ const adminRouter = [
         meta: {
             auth: true,
         },
-        component: () => import('../../views/admin/item/Item.vue')
+        component: () => import('../../views/admin/Item.vue')
+    },
+    {
+        path: '/addAdmin',
+        name: 'addAdmin',
+        meta: {
+            auth: true,
+        },
+        component: () => import('../../views/admin/AddAdmin.vue')
     },
 ];
 

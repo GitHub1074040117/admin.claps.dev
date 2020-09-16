@@ -24,12 +24,12 @@
                 </v-card-title>
                 <div class="panel-content-project" id="tc">
                     <!-- Project Info Card -->
-                    <div  v-if="showCard">
+                    <div  v-if="showCards">
                         <v-card
                                 class="mx-auto float-left ml-5 mr-5 mt-5 mb-5 list"
                                 max-width="255"
-                                v-for="project in Projects"
-                                :key="project.id"
+                                v-for="(project, index) in Projects"
+                                :key="index"
                                 v-cloak
                                 :data-project="project.name"
                         >
@@ -39,8 +39,9 @@
                             ></v-img>
                             <v-list three-line>
                                 <v-list-item>
-                                    <v-list-item-avatar color="teal">
-                                        <img :src="project.avatar_url" alt="">
+                                    <v-list-item-avatar color="green darken-1">
+                                        <img v-if="project.avatar_url" :src="project.avatar_url" alt="">
+                                        <span v-if="!project.avatar_url" class="white--text headline">{{ project.name.charAt(0).toUpperCase() }}</span>
                                     </v-list-item-avatar>
                                     <v-list-item-content>
                                         <v-list-item-title>
@@ -66,17 +67,23 @@
                                 <v-spacer></v-spacer>
                                 <v-btn
                                         icon
-                                        @click="show = !show"
+                                        @click=" show === index ? show = -1 : show = index "
                                 >
-                                    <v-icon>{{ show ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+                                    <v-icon>{{ show === index ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
                                 </v-btn>
                             </v-card-actions>
                             <v-expand-transition>
-                                <div v-show="show">
+                                <div v-show="show === index">
                                     <v-divider></v-divider>
                                     <v-card-text>
                                         <div v-text="project.description"></div>
-                                        <div class="blue--text" v-text="'$' + project.total"></div>
+                                        <div>
+                                            <span v-text="'Received '"></span>
+                                            <span class="blue--text" v-text="'$' + project.total"></span>
+                                            <span v-text="' from '"></span>
+                                            <span class="blue--text" v-text="project.donations"></span>
+                                            <span v-text="' patrons'"></span>
+                                        </div>
                                     </v-card-text>
                                 </div>
                             </v-expand-transition>
@@ -97,8 +104,8 @@
         data() {
             return {
                 search: '',
-                showCard: false,
-                show: false,
+                showCards: false,
+                show: -1,
                 Count: 0,
                 Projects: [{
                     id: "",
@@ -106,6 +113,8 @@
                     description: "",
                     avatar_url: "",
                     total: "",
+                    month: "",
+                    donations: "",
                 }],
             }
         },
@@ -118,7 +127,7 @@
             updateProjectTable() {
                 projectService.getProjectTable().then((res) => {
                     this.Projects = res.data.data.Projects;
-                    this.showCard = true;
+                    this.showCards = true;
                 }).catch((err) => {
                     alert("表单更新时出错！" + err);
                 });

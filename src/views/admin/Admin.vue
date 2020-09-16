@@ -1,29 +1,72 @@
 <template>
-    <v-card style="max-width: 80vw; margin: 40px auto" onload="updateAdminTable()">
-        <v-list three-line>
-            <v-list-item
-                    v-for="item in Admins"
-                    :key="item.id"
-            >
-                <v-list-item-avatar>
-                    <v-img :src="item.avatar_url"></v-img>
-                </v-list-item-avatar>
-                <v-list-item-content>
-                    <v-list-item-title v-html="item.name">
-                    </v-list-item-title>
-                    <v-list-item-subtitle v-html="item.account + ' / ' + item.role"></v-list-item-subtitle>
-                </v-list-item-content>
-                <v-btn
-                        color="red"
-                        text
+    <div>
+        <template>
+            <div>
+                <v-app-bar
+                        color="darkgray"
+                        src="https://picsum.photos/1920/1080?random"
                         dark
-                        @click="deleteAdmin"
                 >
-                    DELETE
+                    <v-app-bar-nav-icon>
+                    </v-app-bar-nav-icon>
+                    <v-toolbar-title>
+                        <div v-text="' Admin management '"></div>
+                    </v-toolbar-title>
+                    <v-spacer></v-spacer>
+                    <v-btn
+                            color="green"
+                            @click="addAdmin"
+                    >
+                        ADD ADMIN
+                    </v-btn>
+                </v-app-bar>
+            </div>
+        </template>
+        <v-card style="max-width: 80vw; margin: 40px auto" onload="updateAdminTable()">
+            <v-list three-line>
+                <v-list-item
+                        v-for="item in Admins"
+                        :key="item.user_id"
+                >
+                    <v-list-item-avatar>
+                        <v-img :src="item.avatar_url"></v-img>
+                    </v-list-item-avatar>
+                    <v-list-item-content>
+                        <v-list-item-title v-html="item.name">
+                        </v-list-item-title>
+                        <v-list-item-subtitle v-html="item.email + ' / ' + item.role"></v-list-item-subtitle>
+                    </v-list-item-content>
+                    <v-btn
+                            v-if="item.role.charAt(0) !== 's'"
+                            color="red"
+                            text
+                            dark
+                            @click="deleteAdmin"
+                            :id="item.email"
+                    >
+                        DELETE
+                    </v-btn>
+                </v-list-item>
+            </v-list>
+        </v-card>
+        <v-snackbar
+                v-model="snackbar"
+                :timeout="2000"
+        >
+            管理员删除成功！
+            <!--<template v-slot:action="{ attrs }">
+                <v-btn
+                        color="blue"
+                        text
+                        v-bind="attrs"
+                        @click="snackbar = false"
+                >
+                    Close
                 </v-btn>
-            </v-list-item>
-        </v-list>
-    </v-card>
+            </template>-->
+        </v-snackbar>
+    </div>
+
 </template>
 
 <script>
@@ -33,12 +76,14 @@
         name: "Admin",
         data() {
             return {
+                snackbar: false,
                 Admins: [{
-                    id: "",
+                    user_id: "",
                     name: "",
-                    account: "",
+                    email: "",
                     role: "",
                     avatar_url: "",
+                    mixin_id: "",
                 }],
             };
         },
@@ -59,30 +104,24 @@
             deleteAdmin(event) {
                 let r = confirm("确定要删除吗？");
                 if (!r) return;
-                // 在html中删除一行记录
-                const row = event.currentTarget.parentNode;
-                // 获取要删除的账号
-                const account = event.currentTarget.id;
-                adminService.deleteAdmin({account}).then((res) => {
+
+                // 获取要删除管理员的邮箱
+                const email = event.currentTarget.id;
+                adminService.deleteAdmin(email).then((res) => {
                     if (res.data.code === 200) {
-                        row.remove();
+                        location.reload();
+                        this.snackbar = true;
+                        return null;
                     }
                     alert(res.data.msg);
+                }).catch((err) => {
+                    alert(err);
                 });
-            },
-
-            showConfirmDialog() {
-                let r = confirm("确定要删除吗？");
-                if (r === true) {
-                    alert("y");
-                } else {
-                    alert("n");
-                }
             },
 
             // 添加一个管理员
             addAdmin() {
-                this.$router.push({ name: 'admin/item' });
+                this.$router.push({ name: 'addAdmin' });
             },
         },
     };

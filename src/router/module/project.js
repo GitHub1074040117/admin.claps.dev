@@ -13,23 +13,7 @@ const projectRouter = [
         meta: {
             auth: true,
         },
-        component: () => import('../../views/project/detail/Detail.vue')
-    },
-    {
-        path: '/project/:name/add-repository',
-        name: 'add-repository',
-        meta: {
-            auth: true,
-        },
-        component: () => import('../../views/project/detail/Add-repository.vue')
-    },
-    {
-        path: '/project/:name/add-member',
-        name: 'add-member',
-        meta: {
-            auth: true,
-        },
-        component: () => import('../../views/project/detail/Add-member.vue')
+        component: () => import('../../views/project/Detail.vue')
     },
     {
         path: '/project/:name/addMember',
@@ -47,14 +31,13 @@ const projectRouter = [
         },
         component: () => import('../../views/project/AddRepository.vue')
     },
-
     {
-        path: '/projects/item',
-        name: 'projects/item',
+        path: '/project/:name/transact',
+        name: 'projectTransaction',
         meta: {
             auth: true,
         },
-        component: () => import('../../views/project/item/Item.vue')
+        component: () => import('../../views/project/ProjectTransaction.vue')
     },
     {
         path: '/projects/addProject',
