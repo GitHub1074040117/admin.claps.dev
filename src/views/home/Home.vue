@@ -7,26 +7,6 @@
                         <v-col
                                 :cols="12"
                         >
-                            <v-card @click="viewTrans">
-                                <v-img
-                                        :src="'https://cdn.vuetifyjs.com/images/cards/house.jpg'"
-                                        class="white--text align-end"
-                                        gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-                                        height="200px"
-                                >
-                                    <v-card-title v-text="'Transactions & transfers'"></v-card-title>
-                                </v-img>
-
-                                <v-card-actions>
-                                    <v-card-text class="text--primary">
-                                        <div>Show recent bills of each project, you can learn which project is favoured most by others.</div>
-                                    </v-card-text>
-                                </v-card-actions>
-                            </v-card>
-                        </v-col>
-                        <v-col
-                                :cols="6"
-                        >
                             <v-card @click="manageProject">
                                 <v-img
                                         :src="'https://cdn.vuetifyjs.com/images/cards/road.jpg'"
@@ -39,7 +19,28 @@
 
                                 <v-card-actions>
                                     <v-card-text class="text--primary">
-                                        <div>Checking project members, add new projects or delete projects.</div>
+                                        <div>Checking project members, add new projects or delete projects,
+                                            you can learn which project is favoured most by others.</div>
+                                    </v-card-text>
+                                </v-card-actions>
+                            </v-card>
+                        </v-col>
+                        <v-col
+                                :cols="6"
+                        >
+                            <v-card @click="viewTrans">
+                                <v-img
+                                        :src="'https://cdn.vuetifyjs.com/images/carousel/sky.jpg'"
+                                        class="white--text align-end"
+                                        gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+                                        height="200px"
+                                >
+                                    <v-card-title v-text="'Transactions & transfers'"></v-card-title>
+                                </v-img>
+
+                                <v-card-actions>
+                                    <v-card-text class="text--primary">
+                                        <div>Show recent bills of each project and transfers of users</div>
                                     </v-card-text>
                                 </v-card-actions>
                             </v-card>
@@ -68,29 +69,6 @@
                 </v-container>
             </template>
         </v-card>
-
-        <!--<div class="panel-middle">
-            <div class="panel-middle-vertical">
-                <button type="button" class="button-enter" @click="manageProject"><span class="fa fa-bar-chart"></span>查看项目列表</button>
-                <div class="panel-middle-lower-inner">
-                    <p>Checking project members, add new projects or delete projects.</p>
-                </div>
-            </div>
-
-            <div class="panel-middle-vertical">
-                <button type="button" class="button-enter" @click="viewTrans"><span class="fa fa-bank"></span>查看捐赠流水</button>
-                <div class="panel-middle-lower-inner">
-                    <p>Show recent bills of each project, you can learn which project is favoured most by others.</p>
-                </div>
-            </div>
-            <div class="panel-middle-vertical">
-                <button type="button" class="button-enter" @click="manageAdmin"><span class="fa fa-address-book"></span>管理用户界面</button>
-                <div class="panel-middle-lower-inner">
-                    <p>Common administrator has limited authority, while super administrator has all authority including delete other administrator.</p>
-                </div>
-            </div>
-
-        </div>-->
     </div>
 </template>
 
@@ -140,17 +118,9 @@
                 const linear = document.getElementById("progress-linear");
                 linear.style.visibility="hidden";
             },
-            // 装载用户信息
-            /*loadUserInfo() {
-                let name = document.getElementById("userName");
-                let avatar = document.getElementById("userAvatar");
-                name.innerHTML = this.userInfo.name;
-                avatar.setAttribute("src", this.userInfo.avatar_url);
-            },*/
         },
     };
 </script>
 
 <style scoped>
-    @import "../../assets/css/main.css";
 </style>

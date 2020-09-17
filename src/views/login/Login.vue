@@ -96,7 +96,7 @@
                 }).catch(() => {
                     linear.style.display="none";
                     this.tipAble = true;
-                    this.btnDisabled = true;
+                    this.btnDisabled = false;
                 });
             },
 
@@ -142,6 +142,4 @@
 </script>
 
 <style scoped>
-    @import "../../assets/css/login.css";
-    @import "../../assets/css/spin.css";
 </style>

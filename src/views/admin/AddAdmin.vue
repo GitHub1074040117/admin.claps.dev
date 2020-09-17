@@ -161,22 +161,6 @@
                     alert("添加管理员失败！")
                 });
             },
-            /*addMember() {
-                // 动画
-                const linear = document.getElementById("progress-linear");
-                linear.style.display="block";
-                this.hasSaved = true;
-                memberService.addMembers(this.projectName, this.members).then((res) => {
-                    linear.style.display="none";
-                    alert(res.data.msg);
-                    if (res.data.code === 200) {
-                        this.$router.go(-1);
-                    }
-                }).catch((err) => {
-                    linear.style.display="none";
-                    alert(err);
-                })
-            },*/
         },
     }
 </script>

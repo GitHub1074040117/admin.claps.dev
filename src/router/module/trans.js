@@ -7,14 +7,7 @@ const transRouter = [
         },
         component: () => import('../../views/trans/Trans.vue'),
     },
-    {
-        path: '/transact/:name',
-        name: 'transact',
-        meta: {
-            auth: true,
-        },
-        component: () => import('../../views/trans/transact/Transact.vue'),
-    },
+
     {
         path: '/transactions',
         name: "transactions",
@@ -30,14 +23,6 @@ const transRouter = [
             auth: true,
         },
         component: () => import('../../views/trans/Transfers.vue'),
-    },
-    {
-        path: '/transfer/:name',
-        name: 'transfer',
-        meta: {
-            auth: true,
-        },
-        component: () => import('../../views/trans/transfer/Transfer.vue'),
     },
 ];
 

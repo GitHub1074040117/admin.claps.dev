@@ -39,12 +39,22 @@
                 <v-text-field
                         :disabled="!isEditing"
                         color="white"
-                        label="Description"
+                        label="Project Description(optional)"
                         id="v-description"
                         autocomplete="off"
 
                         :rules="descriptionRules"
                         :counter="120"
+                ></v-text-field>
+                <v-text-field
+                        :disabled="!isEditing"
+                        color="white"
+                        label="Project Avatar URL(optional)"
+                        id="v-avatarUrl"
+                        autocomplete="off"
+
+                        :rules="avatarRules"
+                        :counter="100"
                 ></v-text-field>
                 <v-text-field
                         :disabled="!isEditing"
@@ -187,6 +197,9 @@
                 descriptionRules: [
                     v => v.length <= 120 || 'Description must be less than 120 characters',
                 ],
+                avatarRules: [
+                    v => v.length <= 100 || 'Avatar Url must be less than 100 characters',
+                ],
                 repoUrlRules: [
                     v => !!v || "Repository URL is required",
                     //v => /.+http.+/.test(v) || 'Repository URL must be valid (Begin with \'http\' or \'https\')',
@@ -213,6 +226,7 @@
                 ],
                 ProjectInfo: {
                     projectName: "",
+                    avatarUrl: "",
                     description: "",
                     members: [],
                     repoName: "",
@@ -266,11 +280,11 @@
 
                 this.ProjectInfo.projectName = document.getElementById("v-projectName").value;
                 this.ProjectInfo.description = document.getElementById("v-description").value;
+                this.ProjectInfo.avatarUrl = document.getElementById("v-avatarUrl").value;
                 this.ProjectInfo.repoType = document.getElementById("v-repoType").value;
                 this.ProjectInfo.repoUrl = document.getElementById("v-repoUrl").value;
                 this.ProjectInfo.repoName = document.getElementById("v-repoName").value;
                 this.ProjectInfo.distribution = document.getElementById("v-distribution").value;
-                console.log(this.ProjectInfo);
                 projectService.sendNewProjectInfo(this.ProjectInfo).then((res) => {
                     linear.style.display = "none";
                     alert(res.data.msg);

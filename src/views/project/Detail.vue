@@ -8,10 +8,58 @@
                         src="https://picsum.photos/1920/1080?random"
                         dark
                 >
-                    <v-app-bar-nav-icon>
+                    <!-- dialog -->
+                    <v-dialog v-model="dialog" persistent max-width="600px">
+                        <template v-slot:activator="{ on, attrs }">
+                            <v-btn
+                                    class="ma-4"
+                                    icon
+                                    v-bind="attrs"
+                                    v-on="on"
+                            >
+                                <v-avatar v-if="Project.avatar_url">
+                                    <img :src="Project.avatar_url" alt="">
+                                </v-avatar>
+                                <v-icon v-if="!Project.avatar_url">mdi-pencil</v-icon>
+                            </v-btn>
+                        </template>
+                        <v-card>
+                            <v-card-title>
+                                <span class="headline">Editing Project Information</span>
+                            </v-card-title>
+                            <v-card-text>
+                                <v-container>
+                                    <v-row>
+                                        <v-col cols="12" sm="10" md="6">
+                                            <v-text-field label="Project Name(optional)" id="e-editedName" autocomplete="off"></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="10">
+                                            <v-text-field
+                                                    label="Project Avatar URL(optional)"
+                                                    id="e-avatarUrl"
+                                                    autocomplete="off"
+                                                    :disabled="defaultUrl"
+                                            ></v-text-field>
+                                        </v-col>
+                                        <v-checkbox v-model="defaultUrl" :label="'Default'"></v-checkbox>
+                                        <v-col cols="12">
+                                            <v-text-field label="Project Description(optional)" id="e-description" autocomplete="off"></v-text-field>
+                                        </v-col>
+                                    </v-row>
+                                </v-container>
+                            </v-card-text>
+                            <v-card-actions>
+                                <v-spacer></v-spacer>
+                                <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
+                                <v-btn color="blue darken-1" text @click="editProjectInfo">Update</v-btn>
+                            </v-card-actions>
+                        </v-card>
+                    </v-dialog>
 
-                    </v-app-bar-nav-icon>
-
+                    <!--<v-list-item-avatar color="green darken-1" class="ma-3">
+                        <img v-if="Project.avatar_url" :src="Project.avatar_url" alt="">
+                        <span v-if="!Project.avatar_url" class="white&#45;&#45;text headline">{{ Project.name.charAt(0).toUpperCase() }}</span>
+                    </v-list-item-avatar>-->
 
                     <v-toolbar-title>
                         <div v-text="this.projectName"></div>
@@ -19,6 +67,7 @@
 
                     <v-spacer></v-spacer>
 
+                    <!-- menu -->
                     <v-menu
                             bottom
                             origin="center center"
@@ -201,7 +250,7 @@
 
         </div>
 
-        <!-- chart2 -->
+        <!-- chart -->
         <v-card
                 class="float-left text-center mt-1 ml-6"
                 min-width="550"
@@ -243,9 +292,9 @@
                 </span>
                 <v-divider class="my-2"></v-divider>
                 <v-card-actions class="justify-center">
-                    <v-btn text color="green" class="float-left mr-12" id="last-m" @click="changeMonth">Last month</v-btn>
+                    <v-btn text color="green" class="float-left mr-12" id="last-m" @click="changeMonth"><v-icon>mdi-chevron-left</v-icon>Last month</v-btn>
                     <v-btn text @click="viewProjectTransactions">Go to Report</v-btn>
-                    <v-btn text color="green" class="float-right ml-12" id="next-m" @click="changeMonth">Next month</v-btn>
+                    <v-btn text color="green" class="float-right ml-12" id="next-m" @click="changeMonth">Next month<v-icon>mdi-chevron-right</v-icon></v-btn>
                 </v-card-actions>
             </v-card-text>
         </v-card>
@@ -261,6 +310,8 @@
         name: "Detail",
         data() {
             return {
+                defaultUrl: false,
+                dialog: false,
                 time: new Date(),
                 showMembers: false,
                 showRepos: false,
@@ -291,6 +342,11 @@
                     avatar_url: "",
                     total: "",
                 },
+                EditedProjectInfo: [{
+                    editedName: "",
+                    description: "",
+                    avatarUrl: "",
+                }],
                 TransCount: "",
                 Transactions: {
                     id: "",
@@ -379,7 +435,7 @@
                 });
             },
 
-            // 装载项目信息
+            /*// 装载项目信息
             loadProjectInfo() {
                 let img = document.getElementById("projectIcon");
                 let name = document.getElementById("projectName");
@@ -387,7 +443,7 @@
                 img.setAttribute("src", this.Project.avatar_url);
                 name.innerHTML = this.Project.name;
                 desc.innerHTML = this.Project.description;
-            },
+            },*/
 
             // 删除当前项目
             deleteProject() {
@@ -485,11 +541,33 @@
                 this.currentMon = m;
             },
 
+            // 编辑项目信息并更新
+            editProjectInfo() {
+                this.EditedProjectInfo.editedName = document.getElementById("e-editedName").value;
+                // 判断任务图标是否默认
+                if (this.defaultUrl) {
+                    this.EditedProjectInfo.avatarUrl = "defaultUrl";
+                } else {
+                    this.EditedProjectInfo.avatarUrl = document.getElementById("e-avatarUrl").value;
+                }
+
+                this.EditedProjectInfo.description = document.getElementById("e-description").value;
+                projectService.sendEditedProjectInfo(this.projectName, this.EditedProjectInfo).then((res) => {
+                    if (res.data.code === 200) {
+                        if (this.EditedProjectInfo.editedName.length !== 0) {
+                            this.$router.push({ name: 'project/detail', params: {'name': this.EditedProjectInfo.editedName}});
+                        }
+                        location.reload();
+                        this.dialog = false;
+                    }
+                }).catch((err) => {
+                    alert("编辑项目失败！" + err);
+                })
+
+            },
         },
     }
 </script>
 
 <style scoped>
-    @import "../../assets/css/project/project-detail.css";
-    @import "../../assets/css/table.css";
 </style>

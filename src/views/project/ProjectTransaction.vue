@@ -47,7 +47,7 @@
     import projectService from "../../service/projectService";
 
     export default {
-        name: "projectTransaction",
+        name: "ProjectTransaction",
         data() {
             return {
                 search: '',

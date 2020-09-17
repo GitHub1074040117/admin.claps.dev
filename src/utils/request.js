@@ -2,8 +2,9 @@ import axios from 'axios';
 import storageService from "../service/storageService";
 
 const service = axios.create({
-    // 读取api的环境变量
-    baseURL: process.env.VUE_APP_BASE_URL,
+    // api的url地址
+    //baseURL: 'https://admin-api.claps.dev/',
+    baseURL: 'http://localhost:7003/',
     // 持续时间2分钟
     timeout: 1000 * 120,
     // token验证请求的有效性

@@ -1,99 +1,231 @@
 <template>
-    <div class="container-project">
-        <div class="panel-main-project" onload="updateProjectTable()">
-            <v-card>
-                <!-- project header with search -->
-                <v-card-title>
-                    PROJECTS
-                    <v-btn
-                            color="green"
-                            text
-                            @click="addNewProject"
-                    >
-                        NEW PROJECT
-                    </v-btn>
+    <v-container fluid onload="updateProjectTable()">
+        <v-card class="pl-5 pr-5">
+            <!-- project header with search and sort-->
+            <v-card-title>
+                <v-btn icon class="mr-4" @click="expandAll">
+                    <v-icon>mdi-bookmark</v-icon>
+                </v-btn>
+
+                PROJECTS
+                <v-btn
+                        color="green"
+                        text
+                        @click="addNewProject"
+                >
+                    NEW PROJECT
+                </v-btn>
+                <v-spacer></v-spacer>
+
+                <!-- Sort -->
+                <template>
                     <v-spacer></v-spacer>
-                    <v-text-field
-                            id="project_search"
-                            type="search"
-                            append-icon="mdi-magnify"
-                            label="Search"
-                            single-line
+                    <v-select
+                            v-model="sortBy"
                             hide-details
-                    ></v-text-field>
-                </v-card-title>
-                <div class="panel-content-project" id="tc">
-                    <!-- Project Info Card -->
-                    <div  v-if="showCards">
-                        <v-card
-                                class="mx-auto float-left ml-5 mr-5 mt-5 mb-5 list"
-                                max-width="255"
-                                v-for="(project, index) in Projects"
-                                :key="index"
-                                v-cloak
-                                :data-project="project.name"
+                            :items="keys"
+                            label="Sort by"
+                            color="darkgray"
+                    ></v-select>
+                    <v-btn-toggle
+                            v-model="sortDesc"
+                            mandatory
+                    >
+                        <v-btn
+                                text
+                                color="darkgray"
+                                :value="false"
                         >
-                            <v-img
-                                    src="https://picsum.photos/1920/1080?random"
-                                    height="150px"
-                            ></v-img>
-                            <v-list three-line>
-                                <v-list-item>
-                                    <v-list-item-avatar color="green darken-1">
-                                        <img v-if="project.avatar_url" :src="project.avatar_url" alt="">
-                                        <span v-if="!project.avatar_url" class="white--text headline">{{ project.name.charAt(0).toUpperCase() }}</span>
-                                    </v-list-item-avatar>
-                                    <v-list-item-content>
-                                        <v-list-item-title>
-                                            <div v-text="project.name"></div>
-                                        </v-list-item-title>
-                                        <v-list-item-subtitle>
-                                            <div v-text="project.description"></div>
-                                        </v-list-item-subtitle>
-                                    </v-list-item-content>
+                            <v-icon>mdi-arrow-up</v-icon>
+                        </v-btn>
+                        <v-btn
+                                text
+                                color="darkgray"
+                                :value="true"
+                        >
+                            <v-icon>mdi-arrow-down</v-icon>
+                        </v-btn>
+                    </v-btn-toggle>
+                </template>
+                <v-spacer></v-spacer>
+                <!-- Search -->
+                <v-text-field
+                        id="project_search"
+                        type="search"
+                        append-icon="mdi-magnify"
+                        label="Search"
+                        single-line
+                        hide-details
+
+                        v-model="search"
+
+                ></v-text-field>
+            </v-card-title>
+            <!-- content -->
+            <v-data-iterator
+                    :items="Projects"
+                    :items-per-page.sync="itemsPerPage"
+                    :page="page"
+                    :search="search"
+                    :sort-by="sortBy.toLowerCase()"
+                    :sort-desc="sortDesc"
+                    hide-default-footer
+            >
+                <!-- Projects Info cards -->
+                <template v-slot:default="props">
+                    <v-row v-if="showCards">
+                        <v-col
+                                v-for="(item, index) in props.items"
+                                :key="index"
+                                cols="12"
+                                sm="6"
+                                md="4"
+                                lg="3"
+                        >
+                            <v-card>
+                                <v-img
+                                        src="https://picsum.photos/1920/1080?random"
+                                        height="150px"
+                                ></v-img>
+                                <v-list three-line>
+                                    <v-list-item>
+                                        <v-list-item-avatar color="green darken-1">
+                                            <img v-if="item.avatar_url" :src="item.avatar_url" alt="">
+                                            <span v-if="!item.avatar_url" class="white--text headline">{{ item.name.charAt(0).toUpperCase() }}</span>
+                                        </v-list-item-avatar>
+                                        <v-list-item-content>
+                                            <v-list-item-title>
+                                                <div v-text="item.name"></div>
+                                            </v-list-item-title>
+                                            <v-list-item-subtitle>
+                                                <div v-text="item.description"></div>
+                                            </v-list-item-subtitle>
+                                        </v-list-item-content>
+                                    </v-list-item>
+                                </v-list>
+
+                                <!-- Project Menu -->
+                                <v-card-actions>
+                                    <v-btn
+                                            color="green"
+                                            text
+                                            @click="editProject"
+                                            :id="item.name"
+                                    >
+                                        Manage Project
+                                    </v-btn>
+                                    <v-spacer></v-spacer>
+                                    <v-btn
+                                            icon
+                                            @click=" show === index ? show = -1 : show = index "
+                                    >
+                                        <v-icon>{{ show === index || show === -2 ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
+                                    </v-btn>
+                                </v-card-actions>
+                                <!-- Project Expansion -->
+                                <v-expand-transition>
+                                    <div v-show="show === index || show === -2">
+                                        <v-divider></v-divider>
+                                        <v-card-text>
+                                            <div v-text="item.description"></div>
+                                            <div>
+                                                <span v-text="'Received totally '"></span>
+                                                <span class="blue--text" v-text="'$' + item.total"></span>
+                                                <span v-text="' from '"></span>
+                                                <span class="blue--text" v-text="item.donations"></span>
+                                                <span v-text="' patrons'"></span>
+                                            </div>
+                                        </v-card-text>
+                                    </div>
+                                </v-expand-transition>
+
+
+
+
+
+                                <!--<v-card-title class="subheading font-weight-bold">{{ item.name }}</v-card-title>
+
+                                <v-divider></v-divider>
+
+                                <v-list dense>
+                                    <v-list-item
+                                            v-for="(key, index) in filteredKeys"
+                                            :key="index"
+                                    >
+                                        <v-list-item-content :class="{ 'blue&#45;&#45;text': sortBy === key }">{{ key }}:</v-list-item-content>
+                                        <v-list-item-content class="align-end" :class="{ 'blue&#45;&#45;text': sortBy === key }">{{ item[key.toLowerCase()] }}</v-list-item-content>
+                                    </v-list-item>
+                                </v-list>-->
+
+
+                            </v-card>
+                        </v-col>
+                    </v-row>
+                </template>
+
+                <!-- Footer -->
+                <template v-slot:footer>
+                    <v-row class="mt-2 ml-1" align="center" justify="center">
+                        <span class="grey--text">Projects per page</span>
+                        <v-menu offset-y>
+                            <template v-slot:activator="{ on, attrs }">
+                                <v-btn
+                                        dark
+                                        text
+                                        color="green"
+                                        class="ml-2"
+                                        v-bind="attrs"
+                                        v-on="on"
+                                >
+                                    {{ itemsPerPage }}
+                                    <v-icon>mdi-chevron-down</v-icon>
+                                </v-btn>
+                            </template>
+                            <v-list>
+                                <v-list-item
+                                        v-for="(number, index) in itemsPerPageArray"
+                                        :key="index"
+                                        @click="updateItemsPerPage(number)"
+                                >
+                                    <v-list-item-title>{{ number }}</v-list-item-title>
                                 </v-list-item>
                             </v-list>
+                        </v-menu>
 
-                            <!-- Project Menu -->
-                            <v-card-actions>
-                                <v-btn
-                                        color="green"
-                                        text
-                                        @click="editProject"
-                                        :id="project.name"
-                                >
-                                    Manage Project
-                                </v-btn>
-                                <v-spacer></v-spacer>
-                                <v-btn
-                                        icon
-                                        @click=" show === index ? show = -1 : show = index "
-                                >
-                                    <v-icon>{{ show === index ? 'mdi-chevron-up' : 'mdi-chevron-down' }}</v-icon>
-                                </v-btn>
-                            </v-card-actions>
-                            <v-expand-transition>
-                                <div v-show="show === index">
-                                    <v-divider></v-divider>
-                                    <v-card-text>
-                                        <div v-text="project.description"></div>
-                                        <div>
-                                            <span v-text="'Received '"></span>
-                                            <span class="blue--text" v-text="'$' + project.total"></span>
-                                            <span v-text="' from '"></span>
-                                            <span class="blue--text" v-text="project.donations"></span>
-                                            <span v-text="' patrons'"></span>
-                                        </div>
-                                    </v-card-text>
-                                </div>
-                            </v-expand-transition>
-                        </v-card>
-                    </div>
-                </div>
-            </v-card>
-        </div>
+                        <v-spacer></v-spacer>
 
-    </div>
+                        <span
+                                class="mr-4
+                                grey--text"
+                        >
+                            Page {{ page }} of {{ numberOfPages }}
+                        </span>
+                        <v-btn
+                                text
+                                fab
+                                dark
+                                color="green"
+                                class="mr-1"
+                                @click="formerPage"
+                        >
+                            <v-icon>mdi-chevron-left</v-icon>
+                        </v-btn>
+                        <v-btn
+                                text
+                                fab
+                                dark
+                                color="green"
+                                class="ml-1"
+                                @click="nextPage"
+                        >
+                            <v-icon>mdi-chevron-right</v-icon>
+                        </v-btn>
+                    </v-row>
+                </template>
+            </v-data-iterator>
+        </v-card>
+
+    </v-container>
 </template>
 
 <script>
@@ -101,12 +233,23 @@
 
     export default {
         name: "Project",
-        data() {
+        data () {
             return {
+                itemsPerPageArray: [8, 12, 16],
                 search: '',
+                filter: {},
+                sortDesc: false,
+                page: 1,
+                itemsPerPage: 8,
+                sortBy: 'name',
+                keys: [
+                    'Name',
+                    'Total',
+                    'Donations',
+                ],
+
+                show: false,
                 showCards: false,
-                show: -1,
-                Count: 0,
                 Projects: [{
                     id: "",
                     name: "",
@@ -121,7 +264,14 @@
         mounted: function() {
             this.updateProjectTable();
         },
-
+        computed: {
+            numberOfPages () {
+                return Math.ceil(this.Projects.length / this.itemsPerPage)
+            },
+            filteredKeys () {
+                return this.keys.filter(key => key !== `Name`)
+            },
+        },
         methods: {
             // 进入页面更新项目表单
             updateProjectTable() {
@@ -144,25 +294,37 @@
                     }
                 })
             },
-
-            // 添加新项目
-            addNewProject() {
-                this.$router.push({ name: 'addProject' });
-            },
-
             // 进入项目详细界面
             editProject(event) {
-                //const i = event.currentTarget.id;
                 const projectName = event.currentTarget.id;
                 // 携带项目参数
                 this.$router.push({ name: 'project/detail', params: {'name': projectName}});
             },
+            // 全部展开
+            expandAll() {
+                if (this.show === -2) {
+                    this.show = -1;
+                } else {
+                    this.show = -2;
+                }
+            },
+            // 添加新项目
+            addNewProject() {
+                this.$router.push({ name: 'addProject' });
+            },
+            nextPage () {
+                if (this.page + 1 <= this.numberOfPages) this.page += 1
+            },
+            formerPage () {
+                if (this.page - 1 >= 1) this.page -= 1
+            },
+            updateItemsPerPage (number) {
+                this.itemsPerPage = number
+            },
         },
-
     }
 </script>
 
 <style scoped>
-    @import "../../assets/css/project/project.css";
-    @import "../../assets/css/box.css";
+
 </style>
