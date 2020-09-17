@@ -15,6 +15,16 @@ const routes = [
         component: () => import('../views/login/Login.vue')
     },
     {
+        path: '/test',
+        name: 'test',
+        component: () => import('../views/project/Project.vue')
+    },
+    {
+        path: '/test-project',
+        name: 'test-project',
+        component: () => import('../views/test/Project.vue')
+    },
+    {
       path: '/home',
       name: 'home',
       // 元信息
@@ -33,7 +43,7 @@ const routes = [
 
 const router = new VueRouter({
   mode: 'history',
-  base: process.env.BASE_URL,
+  base: '/',
   routes
 });
 

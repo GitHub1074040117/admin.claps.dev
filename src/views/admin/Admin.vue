@@ -54,16 +54,6 @@
                 :timeout="2000"
         >
             管理员删除成功！
-            <!--<template v-slot:action="{ attrs }">
-                <v-btn
-                        color="blue"
-                        text
-                        v-bind="attrs"
-                        @click="snackbar = false"
-                >
-                    Close
-                </v-btn>
-            </template>-->
         </v-snackbar>
     </div>
 
@@ -128,6 +118,5 @@
 </script>
 
 <style scoped>
-    @import "../../assets/css/admin/admin.css";
-    @import "../../assets/css/table.css";
+
 </style>

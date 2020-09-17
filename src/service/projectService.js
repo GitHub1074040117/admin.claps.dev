@@ -1,8 +1,8 @@
 import request from '../utils/request';
 
 // 发送要要添加的项目信息
-const sendNewProjectInfo = ({projectName, description, members, repoName, repoUrl, repoType, distribution}) => {
-    return request.post('projects/add', {projectName, description, members, repoName, repoUrl, repoType, distribution});
+const sendNewProjectInfo = ({projectName, avatarUrl, description, members, repoName, repoUrl, repoType, distribution}) => {
+    return request.post('projects/add', {projectName, avatarUrl, description, members, repoName, repoUrl, repoType, distribution});
 };
 
 // 请求项目表信息
@@ -28,6 +28,11 @@ const deleteProject = (projectName) => {
     return request.post('project/' + projectName + '/delete');
 };
 
+// 发送编辑的项目信息
+const sendEditedProjectInfo = ( projectName, {editedName, avatarUrl, description}) => {
+    return request.post('project/' + projectName + '/edit', {editedName, avatarUrl, description})
+};
+
 export default {
     sendNewProjectInfo,
     getProjectTable,
@@ -35,4 +40,5 @@ export default {
     getProjectByName,
     getProjectByUserName,
     deleteProject,
+    sendEditedProjectInfo,
 };
