@@ -35,6 +35,7 @@
 
                         :rules="nameRules"
                         :counter="50"
+                        value=""
                 ></v-text-field>
                 <v-text-field
                         :disabled="!isEditing"
@@ -45,6 +46,7 @@
 
                         :rules="descriptionRules"
                         :counter="120"
+                        value=""
                 ></v-text-field>
                 <v-text-field
                         :disabled="!isEditing"
@@ -55,6 +57,7 @@
 
                         :rules="avatarRules"
                         :counter="100"
+                        value=""
                 ></v-text-field>
                 <v-text-field
                         :disabled="!isEditing"
@@ -65,16 +68,18 @@
 
                         :rules="repoNameRules"
                         :counter="50"
+                        value=""
                 ></v-text-field>
                 <v-text-field
                         :disabled="!isEditing"
                         color="white"
-                        label="Repository URL"
+                        label="Repository Slug"
                         id="v-repoUrl"
                         autocomplete="off"
 
                         :rules="repoUrlRules"
                         :counter="100"
+                        value=""
                 ></v-text-field>
                 <v-autocomplete
                         :disabled="!isEditing"

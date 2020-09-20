@@ -132,7 +132,7 @@
                                                 <span v-text="'Received totally '"></span>
                                                 <span class="blue--text" v-text="'$' + item.total"></span>
                                                 <span v-text="' from '"></span>
-                                                <span class="blue--text" v-text="item.donations"></span>
+                                                <span class="blue--text" v-text="!item.donations ? 0 : item.donations "></span>
                                                 <span v-text="' patrons'"></span>
                                             </div>
                                         </v-card-text>

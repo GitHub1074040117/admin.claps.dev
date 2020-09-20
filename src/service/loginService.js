@@ -18,8 +18,14 @@ const getLoginInfo = () => {
     return request.get('login/info');
 };
 
+// 验证Token有效性
+const checkTokenAuth = () => {
+    return request.get('login/authToken');
+};
+
 export default {
     getThirdAuthUrl,
     sendCode,
     getLoginInfo,
+    checkTokenAuth,
 };

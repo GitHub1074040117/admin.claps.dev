@@ -45,12 +45,16 @@ const userModule = {
                 loginService.sendCode( {Code} ).then((res) => {
                     if (res.data.code !== 200) {
                         alert(res.data.msg);
+                        return null;
                     }
                     console.log(res.data);
                     return loginService.getLoginInfo();
                 }).then((res) => {
                     // 检查token是否存在
-
+                    if (!res.data.data.Token) {
+                        alert("Token不存在！");
+                        return null;
+                    }
                     // 检查token是否失效
 
                     // 存储用户名称和账号, (json序列化，能以字符串显示出来)
