@@ -229,11 +229,6 @@
                                         </template>
 
                                         <v-list>
-                                            <v-list-item @click.stop="" :id="repo.id">
-                                                <v-list-item-content>
-                                                    <v-list-item-title>View</v-list-item-title>
-                                                </v-list-item-content>
-                                            </v-list-item>
                                             <v-list-item @click.stop="deleteRepository" :id="repo.id">
                                                 <v-list-item-content>
                                                     <v-list-item-title class="red--text">Delete</v-list-item-title>
@@ -347,7 +342,6 @@
                     description: "",
                     avatarUrl: "",
                 }],
-                TransCount: "",
                 Transactions: {
                     id: "",
                     project_id: "",
@@ -403,8 +397,6 @@
                         this.calculateTransMonthly(this.Transactions);
                         this.currentMon = this.time.getMonth() + 1;
                         this.value = this.TransMonthly[this.currentMon].amounts;
-                        console.log(this.TransMonthly);
-                        this.TransCount = res.data.data.Count;
                     }
                 }).catch((err) => {
                     alert("获取项目时出错！" + err);
@@ -434,16 +426,6 @@
                     alert("获取仓库表单时出错！" + err);
                 });
             },
-
-            /*// 装载项目信息
-            loadProjectInfo() {
-                let img = document.getElementById("projectIcon");
-                let name = document.getElementById("projectName");
-                let desc = document.getElementById("projectDesc");
-                img.setAttribute("src", this.Project.avatar_url);
-                name.innerHTML = this.Project.name;
-                desc.innerHTML = this.Project.description;
-            },*/
 
             // 删除当前项目
             deleteProject() {

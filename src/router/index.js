@@ -5,6 +5,7 @@ import store from '../store'
 import transRouter from "./module/trans";
 import projectRouter from "./module/project";
 import adminRouter from "./module/admin";
+import loginService from "../service/loginService";
 
 Vue.use(VueRouter);
 
@@ -14,16 +15,7 @@ const routes = [
         name: 'app',
         component: () => import('../views/login/Login.vue')
     },
-    {
-        path: '/test',
-        name: 'test',
-        component: () => import('../views/project/Project.vue')
-    },
-    {
-        path: '/test-project',
-        name: 'test-project',
-        component: () => import('../views/test/Project.vue')
-    },
+
     {
       path: '/home',
       name: 'home',
@@ -54,7 +46,19 @@ router.beforeEach((to, from, next) => {
   if (to.meta.auth) {
     // 判断用户是否登录, token是否存在
     if (store.state.userModule.token) {
-      next();
+        // 检查token是否失效
+        loginService.checkTokenAuth().then((res) => {
+            console.log(res.data.msg);
+            if (res.data.code !== 200) {
+                alert("管理员身份已失效！请重新登录！");
+                router.push({name: "login"}).then(r => {
+                    console.log(r.meta);
+                    return null;
+                });
+            } else {
+                next();
+            }
+        });
     } else {
       // 否则跳转登录
       alert("您还未登录！请先登录");
