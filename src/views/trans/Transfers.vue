@@ -23,6 +23,7 @@
 
 <script>
     import transService from "../../service/transService";
+    import util from "../../utils/util";
 
     export default {
         name: "Transfers",
@@ -40,7 +41,6 @@
                     { text: 'Amount ($)', value: 'amount' },
                     { text: 'Trace ID', value: 'trace_id' },
                     { text: 'Memo', value: 'memo' },
-                    { text: 'Bot ID', value: 'bot_id' },
                     { text: 'Snapshot ID', value: 'snapshot_id' },
                     { text: 'Created At', value: 'created_at' },
                 ],
@@ -70,6 +70,9 @@
                         alert(res.data.msg);
                     } else {
                         this.Transfers = res.data.data.Transfers;
+                        for(let i = 0; i < this.Transfers.length; i++) {
+                            this.Transfers[i].created_at = util.renderTime(this.Transfers[i].created_at);
+                        }
                     }
                 }).catch((err) => {
                     alert("获取捐赠流水时出错！" + err);

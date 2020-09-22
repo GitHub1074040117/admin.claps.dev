@@ -18,7 +18,7 @@
                     class="white--text align-end"
                     height="270px"
                     color="darkgray"
-                    src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+                    src="https://i.picsum.photos/id/683/1920/1080.jpg?hmac=EewMJbxDanIFuo8ZJCRiasurjxJAfION35RjWUKqIwM"
             >
                 <v-card-title>Welcome to admin.claps.dev!</v-card-title>
             </v-img>
@@ -53,6 +53,7 @@
 
 <script>
     import loginService from "../../service/loginService";
+    import store from '../../store';
     export default {
         name: "Login",
 
@@ -79,12 +80,16 @@
         methods: {
             // 请求登录，转向github授权
             thirdPartyAuth() {
+                // 信息存在则直接登录
+                if (store.state.userModule.token) {
+                    this.$router.replace({ name: 'home' });
+                    return null;
+                }
+
                 // 加载动画
                 this.btnDisabled = true;
                 const linear = document.getElementById("progress-linear");
                 linear.style.display="block";
-                // 设置按钮不可点击
-
 
                 // 请求api
                 loginService.getThirdAuthUrl().then((res) => {

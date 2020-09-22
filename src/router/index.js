@@ -5,7 +5,7 @@ import store from '../store'
 import transRouter from "./module/trans";
 import projectRouter from "./module/project";
 import adminRouter from "./module/admin";
-import loginService from "../service/loginService";
+//import loginService from "../service/loginService";
 
 Vue.use(VueRouter);
 
@@ -47,7 +47,7 @@ router.beforeEach((to, from, next) => {
     // 判断用户是否登录, token是否存在
     if (store.state.userModule.token) {
         // 检查token是否失效
-        loginService.checkTokenAuth().then((res) => {
+        /*loginService.checkTokenAuth().then((res) => {
             console.log(res.data.msg);
             if (res.data.code !== 200) {
                 alert("管理员身份已失效！请重新登录！");
@@ -58,7 +58,8 @@ router.beforeEach((to, from, next) => {
             } else {
                 next();
             }
-        });
+        });*/
+        next();
     } else {
       // 否则跳转登录
       alert("您还未登录！请先登录");

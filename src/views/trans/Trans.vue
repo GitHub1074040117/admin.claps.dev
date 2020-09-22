@@ -29,7 +29,7 @@
                         >
                             <v-card @click="viewTransfer">
                                 <v-img
-                                        :src="'https://cdn.vuetifyjs.com/images/cards/desert.jpg'"
+                                        :src="'https://i.picsum.photos/id/251/1920/1080.jpg?hmac=x90F-RX-Ki7tHJFBhuOimBr_znHKQY1Ui3JFu6q8sDE'"
                                         class="white--text align-end"
                                         gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
                                         height="200px"
