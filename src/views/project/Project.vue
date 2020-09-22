@@ -3,8 +3,8 @@
         <v-card class="pl-5 pr-5">
             <!-- project header with search and sort-->
             <v-card-title>
-                <v-btn icon class="mr-4" @click="expandAll">
-                    <v-icon>mdi-bookmark</v-icon>
+                <v-btn icon class="mr-4" @click="expandAll" large color="green">
+                    <v-icon >mdi-bookmark</v-icon>
                 </v-btn>
 
                 PROJECTS
@@ -97,9 +97,7 @@
                                             <v-list-item-title>
                                                 <div v-text="item.name"></div>
                                             </v-list-item-title>
-                                            <v-list-item-subtitle>
-                                                <div v-text="item.description"></div>
-                                            </v-list-item-subtitle>
+
                                         </v-list-item-content>
                                     </v-list-item>
                                 </v-list>
@@ -138,24 +136,6 @@
                                         </v-card-text>
                                     </div>
                                 </v-expand-transition>
-
-
-
-
-
-                                <!--<v-card-title class="subheading font-weight-bold">{{ item.name }}</v-card-title>
-
-                                <v-divider></v-divider>
-
-                                <v-list dense>
-                                    <v-list-item
-                                            v-for="(key, index) in filteredKeys"
-                                            :key="index"
-                                    >
-                                        <v-list-item-content :class="{ 'blue&#45;&#45;text': sortBy === key }">{{ key }}:</v-list-item-content>
-                                        <v-list-item-content class="align-end" :class="{ 'blue&#45;&#45;text': sortBy === key }">{{ item[key.toLowerCase()] }}</v-list-item-content>
-                                    </v-list-item>
-                                </v-list>-->
 
 
                             </v-card>
@@ -267,9 +247,6 @@
         computed: {
             numberOfPages () {
                 return Math.ceil(this.Projects.length / this.itemsPerPage)
-            },
-            filteredKeys () {
-                return this.keys.filter(key => key !== `Name`)
             },
         },
         methods: {

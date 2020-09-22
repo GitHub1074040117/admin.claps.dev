@@ -23,6 +23,7 @@
 
 <script>
     import transService from "../../service/transService";
+    import util from "../../utils/util";
 
     export default {
         name: "Transactions",
@@ -70,6 +71,9 @@
                         alert(res.data.msg);
                     } else {
                         this.Transactions = res.data.data.Transactions;
+                        for(let i = 0; i < this.Transactions.length; i++) {
+                            this.Transactions[i].created_at = util.renderTime(this.Transactions[i].created_at);
+                        }
                     }
                 }).catch((err) => {
                     alert("获取捐赠流水时出错！" + err);

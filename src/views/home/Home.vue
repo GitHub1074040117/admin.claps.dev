@@ -9,7 +9,7 @@
                         >
                             <v-card @click="manageProject">
                                 <v-img
-                                        :src="'https://cdn.vuetifyjs.com/images/cards/road.jpg'"
+                                        :src="'https://i.picsum.photos/id/692/1920/1080.jpg?hmac=Oq1BbdEMm2D6VOmB_sNxcxilNNFjY3cje_xZTn5onTk'"
                                         class="white--text align-end"
                                         gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
                                         height="200px"
@@ -50,7 +50,7 @@
                         >
                             <v-card @click="manageAdmin">
                                 <v-img
-                                        :src="'https://cdn.vuetifyjs.com/images/cards/plane.jpg'"
+                                        :src="'https://i.picsum.photos/id/719/1920/1080.jpg?hmac=n7aKgek44Af_Ug1hQVs0qWFEmv-Oa7-3hIBIdOV11Dw'"
                                         class="white--text align-end"
                                         gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
                                         height="200px"

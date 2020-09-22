@@ -45,6 +45,7 @@
 
 <script>
     import projectService from "../../service/projectService";
+    import util from "../../utils/util";
 
     export default {
         name: "ProjectTransaction",
@@ -96,6 +97,9 @@
                     } else {
                         this.Project = res.data.data.Project;
                         this.Transactions = res.data.data.Transactions;
+                        for(let i = 0; i < this.Transactions.length; i++) {
+                            this.Transactions[i].created_at = util.renderTime(this.Transactions[i].created_at);
+                        }
                     }
                 }).catch((err) => {
                     alert("获取项目时出错！" + err);
