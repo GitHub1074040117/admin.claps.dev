@@ -50,7 +50,7 @@
                         >
                             <v-card @click="manageAdmin">
                                 <v-img
-                                        :src="'https://i.picsum.photos/id/719/1920/1080.jpg?hmac=n7aKgek44Af_Ug1hQVs0qWFEmv-Oa7-3hIBIdOV11Dw'"
+                                        :src="'https://i.picsum.photos/id/197/1920/1080.jpg?hmac=5cTGvM5pMaQ9SrKjHQC7Y8Et1XC51pZM9x_IRfVZSlo'"
                                         class="white--text align-end"
                                         gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
                                         height="200px"

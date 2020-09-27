@@ -40,7 +40,7 @@
                 <v-text-field
                         :disabled="!isEditing"
                         color="white"
-                        label="Project Description(optional)"
+                        label="Project Description"
                         id="v-description"
                         autocomplete="off"
 
@@ -73,7 +73,7 @@
                 <v-text-field
                         :disabled="!isEditing"
                         color="white"
-                        label="Repository Slug"
+                        label="Repository Url"
                         id="v-repoUrl"
                         autocomplete="off"
 
@@ -200,6 +200,7 @@
                     v => v.length <= 50 || 'Name must be less than 50 characters',
                 ],
                 descriptionRules: [
+                    v => !!v || 'Description is required',
                     v => v.length <= 120 || 'Description must be less than 120 characters',
                 ],
                 avatarRules: [

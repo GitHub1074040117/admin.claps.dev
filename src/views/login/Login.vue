@@ -6,7 +6,7 @@
                 v-model="tipAble"
                 transition="slide-y-transition"
         >
-            An Error occurred when tried to connect with github.com! Please try again later.
+            An error occurred! Please try again later.
         </v-alert>
         <v-card
                 class="mx-auto my-auto"
@@ -78,6 +78,7 @@
         },
 
         methods: {
+
             // 请求登录，转向github授权
             thirdPartyAuth() {
                 // 信息存在则直接登录
@@ -132,10 +133,12 @@
                     let Token = res.data.data.Token;
                     // 本地储存用户信息和Token
                     this.$store.dispatch('userModule/storeUserInfo', {User, Token});
-                    this.$router.replace({ name: 'home' });
                     // 恢复按钮
                     linear.style.display="none";
                     this.btnDisabled = false;
+                    return this;
+                }).then(() => {
+                    this.$router.replace({ name: 'home' });
                 }).catch(() => {
                     // 恢复按钮
                     linear.style.display="none";
