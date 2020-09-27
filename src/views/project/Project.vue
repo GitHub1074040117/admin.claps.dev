@@ -257,6 +257,7 @@
                     this.showCards = true;
                 }).catch((err) => {
                     alert("表单更新时出错！" + err);
+                    return null;
                 });
 
                 // 配置input监听器, 实现搜索功能

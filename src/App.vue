@@ -112,8 +112,8 @@
       <v-progress-linear
               id="progress-linear"
               indeterminate
-              style="display: none"
               color="cyan"
+              style="display: none"
       ></v-progress-linear>
       <router-view/>
     </v-main>
@@ -169,6 +169,21 @@ export default {
         console.log("清除用户缓存失败，错误信息：", err);
       });
     },
+
+    progressStart() {
+      const linear = document.getElementById("progress-linear");
+      linear.style.display = "block";
+      return null
+    },
+
+    progressStop() {
+      const linear = document.getElementById("progress-linear");
+      linear.style.display = "none";
+      return null
+    },
   },
 };
 </script>
+<style scoped>
+
+</style>

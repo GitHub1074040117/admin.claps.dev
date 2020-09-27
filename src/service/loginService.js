@@ -1,4 +1,4 @@
-import request from '../utils/request';
+import request from '../utils/loginRequest';
 
 // 用 loginService 来封装 axios 的方法
 

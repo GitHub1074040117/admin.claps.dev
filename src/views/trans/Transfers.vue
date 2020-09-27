@@ -2,7 +2,7 @@
     <div style="max-width: 80vw; margin: 40px auto" onload="updateTransfers()">
         <v-card>
             <v-card-title>
-                Transactions
+                Transfers
                 <v-spacer></v-spacer>
                 <v-text-field
                         v-model="search"
@@ -69,6 +69,7 @@
                     if (res.data.code !== 200) {
                         alert(res.data.msg);
                     } else {
+                        console.log(res.data.data.Transfers);
                         this.Transfers = res.data.data.Transfers;
                         for(let i = 0; i < this.Transfers.length; i++) {
                             this.Transfers[i].created_at = util.renderTime(this.Transfers[i].created_at);

@@ -44,7 +44,7 @@
                         ></v-text-field>
                         <v-text-field
                                 color="white"
-                                label="Repository Slug"
+                                label="Repository Url"
                                 id="repoUrl"
                                 autocomplete="off"
 

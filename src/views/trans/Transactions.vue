@@ -66,10 +66,10 @@
             updateTransactions() {
                 // 获取项目捐赠流水记录
                 transService.getAllTransactions().then((res) => {
-                    console.log("获取的流水列表:", res.data.data);
                     if (res.data.code !== 200) {
                         alert(res.data.msg);
                     } else {
+                        console.log(res.data.data.Transactions);
                         this.Transactions = res.data.data.Transactions;
                         for(let i = 0; i < this.Transactions.length; i++) {
                             this.Transactions[i].created_at = util.renderTime(this.Transactions[i].created_at);

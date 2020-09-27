@@ -6,6 +6,7 @@ const PREFIX = 'claps_';
 const USER_PREFIX = `${PREFIX}user_`;
 const USER_TOKEN = `${USER_PREFIX}token`;
 const USER_INFO = `${USER_PREFIX}info`;
+//let token = JSON.parse(localStorage.getItem(USER_INFO));
 
 
 // 序列化存储
