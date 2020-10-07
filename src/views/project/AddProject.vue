@@ -92,7 +92,7 @@
 
                         :rules="repoTypeRules"
                 ></v-autocomplete>
-                <v-autocomplete
+                <!--<v-autocomplete
                         :disabled="!isEditing"
                         :items="distributions"
                         :filter="customFilter"
@@ -102,7 +102,7 @@
                         id="v-distribution"
 
                         :rules="distributionRules"
-                ></v-autocomplete>
+                ></v-autocomplete>-->
                 <v-autocomplete
                         :disabled="!isEditing"
                         v-model="ProjectInfo.members"
@@ -181,6 +181,7 @@
 <script>
     import userService from "../../service/userService";
     import projectService from "../../service/projectService";
+    import App from "../../App";
 
     export default {
         name: "AddProject",
@@ -281,8 +282,7 @@
                 this.isEditing = !this.isEditing;
                 this.hasSaved = true;
                 // 动画
-                const linear = document.getElementById("progress-linear");
-                linear.style.display="block";
+                App.methods.progressStart();
 
                 this.ProjectInfo.projectName = document.getElementById("v-projectName").value;
                 this.ProjectInfo.description = document.getElementById("v-description").value;
@@ -290,15 +290,15 @@
                 this.ProjectInfo.repoType = document.getElementById("v-repoType").value;
                 this.ProjectInfo.repoUrl = document.getElementById("v-repoUrl").value;
                 this.ProjectInfo.repoName = document.getElementById("v-repoName").value;
-                this.ProjectInfo.distribution = document.getElementById("v-distribution").value;
+                //this.ProjectInfo.distribution = document.getElementById("v-distribution").value;
                 projectService.sendNewProjectInfo(this.ProjectInfo).then((res) => {
-                    linear.style.display = "none";
+                    App.methods.progressStop();
                     alert(res.data.msg);
                     if (res.data.code === 200) {
                         this.$router.push( {name: 'project'} );
                     }
                 }).catch((err) => {
-                    linear.style.display="none";
+                    App.methods.progressStop();
                     alert("添加项目失败！" + err);
                 });
             },

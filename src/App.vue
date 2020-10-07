@@ -1,5 +1,6 @@
 <template>
   <v-app>
+
     <div v-if="this.$route.name!=='login' && this.$route.name!=='app'">
       <v-app-bar
               app
@@ -7,8 +8,15 @@
               color="darkgrey"
               dark
       >
+        <!-- progress linear -->
+        <v-progress-linear
+                id="progress-linear-2"
+                indeterminate
+                color="cyan"
+                style="display: none"
+        ></v-progress-linear>
         <v-spacer></v-spacer>
-        <v-toolbar-title>Welcome to Admin.claps.dev</v-toolbar-title>
+        <v-toolbar-title id="mainTitle" style="display: block">Welcome to Admin.claps.dev</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-app-bar-nav-icon @click.stop="drawerRight = !drawerRight"></v-app-bar-nav-icon>
       </v-app-bar>
@@ -109,6 +117,7 @@
       </v-navigation-drawer>-->
     </div>
     <v-main>
+      <!-- progress linear -->
       <v-progress-linear
               id="progress-linear"
               indeterminate
@@ -171,15 +180,18 @@ export default {
     },
 
     progressStart() {
-      const linear = document.getElementById("progress-linear");
+      //this.servi
+      const linear = document.getElementById("progress-linear-2");
       linear.style.display = "block";
-      return null
+      const title = document.getElementById("mainTitle");
+      title.style.display = "none";
     },
 
     progressStop() {
-      const linear = document.getElementById("progress-linear");
+      const linear = document.getElementById("progress-linear-2");
       linear.style.display = "none";
-      return null
+      const title = document.getElementById("mainTitle");
+      title.style.display = "block";
     },
   },
 };

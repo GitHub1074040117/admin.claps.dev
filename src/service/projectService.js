@@ -1,8 +1,8 @@
 import request from '../utils/request';
 
 // 发送要要添加的项目信息
-const sendNewProjectInfo = ({projectName, avatarUrl, description, members, repoName, repoUrl, repoType, distribution}) => {
-    return request.post('projects/add', {projectName, avatarUrl, description, members, repoName, repoUrl, repoType, distribution});
+const sendNewProjectInfo = ({projectName, avatarUrl, description, members, repoName, repoUrl, repoType}) => {
+    return request.post('projects/add', {projectName, avatarUrl, description, members, repoName, repoUrl, repoType});
 };
 
 // 请求项目表信息
