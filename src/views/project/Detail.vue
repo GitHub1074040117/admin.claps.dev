@@ -7,6 +7,7 @@
                         color="darkgray"
                         src="https://picsum.photos/1920/1080?random"
                         dark
+                        min-width="700"
                 >
                     <!-- dialog -->
                     <v-dialog v-model="dialog" persistent max-width="600px">
@@ -114,7 +115,7 @@
                 <template>
                     <v-card
                             min-width="450"
-                            class="mx-auto float-left"
+                            class="mx-auto float-left mr-6"
                             v-if="showMembers"
 
                     >
@@ -183,7 +184,7 @@
                 <template>
                     <v-card
                             min-width="450"
-                            class="mx-auto float-left"
+                            class="mx-auto float-left mr-6"
                             v-if="showRepos"
                             style="margin-top: 35px;"
                     >
@@ -247,7 +248,7 @@
 
         <!-- chart -->
         <v-card
-                class="float-left text-center mt-1 ml-6"
+                class="float-left text-center mt-1"
                 min-width="700"
                 min-height="500"
         >
@@ -387,7 +388,7 @@
                 // 由项目id获取项目
                 projectService.getProjectByName(this.projectName).then((res) => {
                     if (res.data.code !== 200) {
-                        alert("获取项目失败！");
+                        alert(res.data.msg);
                     } else {
                         this.Project = res.data.data.Project;
                         this.Transactions = res.data.data.Transactions;

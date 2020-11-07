@@ -23,7 +23,6 @@
 
 <script>
     import transService from "../../service/transService";
-    import util from "../../utils/util";
 
     export default {
         name: "Transfers",
@@ -32,12 +31,12 @@
                 search: '',
                 headers: [
                     {
-                        text: 'Mixin ID',
+                        text: 'User Name',
                         align: 'start',
                         sortable: false,
-                        value: 'mixin_id',
+                        value: 'user',
                     },
-                    { text: 'Asset ID', value: 'asset_id' },
+                    { text: 'Asset', value: 'asset' },
                     { text: 'Amount ($)', value: 'amount' },
                     { text: 'Trace ID', value: 'trace_id' },
                     { text: 'Memo', value: 'memo' },
@@ -47,9 +46,9 @@
                 Transfers: [{
                     bot_id: "",
                     snapshot_id: "",
-                    mixin_id: "",
+                    user: "",
                     trace_id: "",
-                    asset_id: "",
+                    asset: "",
                     amount: "",
                     memo: "",
                     created_at: "",
@@ -71,12 +70,12 @@
                     } else {
                         console.log(res.data.data.Transfers);
                         this.Transfers = res.data.data.Transfers;
-                        for(let i = 0; i < this.Transfers.length; i++) {
-                            this.Transfers[i].created_at = util.renderTime(this.Transfers[i].created_at);
-                        }
+                        // for(let i = 0; i < this.Transfers.length; i++) {
+                        //     this.Transfers[i].created_at = util.renderTime(this.Transfers[i].created_at);
+                        // }
                     }
                 }).catch((err) => {
-                    alert("获取捐赠流水时出错！" + err);
+                    alert("获取提现记录时出错！" + err);
                 });
             },
         },

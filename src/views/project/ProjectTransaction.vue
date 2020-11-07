@@ -45,7 +45,6 @@
 
 <script>
     import projectService from "../../service/projectService";
-    import util from "../../utils/util";
 
     export default {
         name: "ProjectTransaction",
@@ -54,12 +53,12 @@
                 search: '',
                 headers: [
                     {
-                        text: 'Project ID',
+                        text: 'Project',
                         align: 'start',
                         sortable: false,
-                        value: 'project_id',
+                        value: 'project_name',
                     },
-                    { text: 'Asset Id', value: 'asset_id' },
+                    { text: 'Asset', value: 'asset' },
                     { text: 'Amount ($)', value: 'amount' },
                     { text: 'Sender', value: 'sender' },
                     { text: 'Receiver', value: 'receiver' },
@@ -67,10 +66,13 @@
                 ],
                 Transactions: [{
                     id: "",
-                    project_id: "",
-                    asset_id: "",
+                    project_avatar: "",
+                    project_name: "",
+                    asset_avatar: "",
+                    asset: "",
                     amount: "",
                     created_at: "",
+                    sender_avatar: "",
                     sender: "",
                     receiver: "",
                 }],
@@ -97,9 +99,9 @@
                     } else {
                         this.Project = res.data.data.Project;
                         this.Transactions = res.data.data.Transactions;
-                        for(let i = 0; i < this.Transactions.length; i++) {
-                            this.Transactions[i].created_at = util.renderTime(this.Transactions[i].created_at);
-                        }
+                        // for(let i = 0; i < this.Transactions.length; i++) {
+                        //     this.Transactions[i].created_at = util.renderTime(this.Transactions[i].created_at);
+                        // }
                     }
                 }).catch((err) => {
                     alert("获取项目时出错！" + err);
