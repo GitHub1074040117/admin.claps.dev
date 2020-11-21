@@ -1,4 +1,4 @@
-# claps-admin-vue
+# admin.claps.dev
 
 ## Project setup
 ```
@@ -15,10 +15,32 @@ yarn serve
 yarn build
 ```
 
-### Lints and fixes files
+##  Deploy to the server side
+
+### Execute the command to generate the dist package
 ```
-yarn lint
+yarn build
+```
+the dist package is ready to be deployed to the server
+
+## Port and other configuration settings
+
+### For development
+Edit the .env.development file
+```
+# port for development
+VUE_APP_PORT=8001
+
+# base api url for development
+VUE_APP_API_URL='http://localhost:7003/'
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### For server
+Edit the .env file
+```
+# port
+VUE_APP_PORT=8001
+
+# base api url
+VUE_APP_API_URL='https://admin-api.claps.dev/'
+```
