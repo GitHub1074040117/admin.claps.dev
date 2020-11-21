@@ -37,7 +37,7 @@
                         <v-list-item-subtitle v-html="item.email + ' / ' + item.role"></v-list-item-subtitle>
                     </v-list-item-content>
                     <v-btn
-                            v-if="item.role.charAt(0) !== 's'"
+                            v-if="role.charAt(0) === 's' && nowName !== item.name"
                             color="red"
                             text
                             dark
@@ -61,12 +61,15 @@
 
 <script>
     import adminService from "../../service/adminService";
+    import store from '../../store'
 
     export default {
         name: "Admin",
         data() {
             return {
                 snackbar: false,
+                role: "",
+                nowName: "",
                 Admins: [{
                     user_id: "",
                     name: "",
@@ -79,6 +82,8 @@
         },
         mounted: function() {
             this.updateAdminTable();
+            this.role = store.state.userModule.userInfo.role;
+            this.nowName = store.state.userModule.userInfo.name;
         },
         methods: {
             // 进入页面更新表单

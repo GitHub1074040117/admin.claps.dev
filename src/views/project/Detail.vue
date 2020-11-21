@@ -208,8 +208,15 @@
                                         <v-img :src="this.Project.avatar_url"></v-img>
                                     </v-list-item-avatar>-->
                                     <v-list-item-content>
-                                        <v-list-item-title class="blue--text" v-html="repo.name"></v-list-item-title>
-                                        <v-list-item-subtitle v-html="repo.slug"></v-list-item-subtitle>
+                                        <v-list-item-title  v-html="repo.name"></v-list-item-title>
+                                        <!--<v-list-item-subtitle v-html="repo.slug"></v-list-item-subtitle>-->
+                                        <v-breadcrumbs class="pa-0">
+                                            <v-breadcrumbs-item
+                                                    :href="repo.slug"
+                                            >
+                                                {{ repo.slug }}
+                                            </v-breadcrumbs-item>
+                                        </v-breadcrumbs>
                                     </v-list-item-content>
                                     <v-menu
                                             bottom
