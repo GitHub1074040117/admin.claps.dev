@@ -101,7 +101,7 @@
                     this.btnDisabled = false;
                 }).catch(() => {
                     linear.style.display="none";
-                    this.tipAble = true;
+                    //this.tipAble = true;
                     this.btnDisabled = false;
                 });
             },
@@ -119,7 +119,7 @@
                 // 发送code并验证用户身份
                 loginService.sendCode( {Code} ).then((res) => {
                     if (res.data.code !== 200) {
-                        this.tipAble = true;
+                        //this.tipAble = true;
                         return null;
                     }
                     // 获取用户信息
