@@ -81,6 +81,8 @@
                     class="pr-12 pl-12"
                     color="success"
                     @click="addRepository"
+                    :loading="load"
+                    :disabled="load"
             >
                 SUBMIT
             </v-btn>
@@ -117,6 +119,7 @@
                 valid: false,
                 notCompleted: false,
                 hasSaved: false,
+                load: false,
                 projectName: '',
                 members: [],
                 repoNameRules: [
@@ -127,7 +130,7 @@
                     v => !!v || "Repository type is required",
                 ],
                 descriptionRules: [
-                    v => v.length <= 120 || 'Description must be less than 120 characters',
+                    v => v.length <= 1200 || 'Description must be less than 120 characters',
                 ],
                 repoUrlRules: [
                     v => !!v || "Repository URL is required",
@@ -149,6 +152,12 @@
             }
         },
         methods: {
+            loading() {
+                this.load = true;
+            },
+            loaded() {
+                this.load = false;
+            },
             customFilter (item, queryText) {
                 const textOne = item.name.toLowerCase();
                 const textTwo = item.abbr.toLowerCase();
@@ -164,21 +173,24 @@
                 }
                 this.projectName = this.$route.params.name;
                 // 动画
-                const linear = document.getElementById("progress-linear");
-                linear.style.display="block";
+                // const linear = document.getElementById("progress-linear");
+                // linear.style.display="block";
+                this.loading();
                 this.hasSaved = true;
                 this.Repository.repoName = document.getElementById("repoName").value;
                 this.Repository.description = document.getElementById("repoDescription").value;
                 this.Repository.repoType = document.getElementById("repoType").value;
                 this.Repository.repoUrl = document.getElementById("repoUrl").value;
                 repositoryService.addRepository(this.projectName, this.Repository).then((res) => {
-                    linear.style.display="none";
+                    // linear.style.display="none";
+                    this.loaded();
                     alert(res.data.msg);
                     if (res.data.code === 200) {
                         this.$router.go(-1);
                     }
                 }).catch((err) => {
-                    linear.style.display="none";
+                    this.loaded();
+                    // linear.style.display="none";
                     alert(err);
                 })
             },
@@ -186,6 +198,41 @@
     }
 </script>
 
-<style scoped>
-
+<style>
+    .custom-loader {
+        animation: loader 1s infinite;
+        display: flex;
+    }
+    @-moz-keyframes loader {
+        from {
+            transform: rotate(0);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+    @-webkit-keyframes loader {
+        from {
+            transform: rotate(0);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+    @-o-keyframes loader {
+        from {
+            transform: rotate(0);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+    @keyframes loader {
+        from {
+            transform: rotate(0);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
 </style>

@@ -37,7 +37,17 @@
                         :counter="50"
                         value=""
                 ></v-text-field>
-                <v-text-field
+                <v-textarea
+                        :disabled="!isEditing"
+                        outlined
+                        id="v-description"
+                        label="Project Description"
+                        value=""
+                        color="white"
+                        :counter="720"
+                        :rules="descriptionRules"
+                ></v-textarea>
+                <!--<v-text-field
                         :disabled="!isEditing"
                         color="white"
                         label="Project Description"
@@ -45,9 +55,9 @@
                         autocomplete="off"
 
                         :rules="descriptionRules"
-                        :counter="120"
+                        :counter="720"
                         value=""
-                ></v-text-field>
+                ></v-text-field>-->
                 <v-text-field
                         :disabled="!isEditing"
                         color="white"
@@ -202,7 +212,7 @@
                 ],
                 descriptionRules: [
                     v => !!v || 'Description is required',
-                    v => v.length <= 120 || 'Description must be less than 120 characters',
+                    v => v.length <= 720 || 'Description must be less than 720 characters',
                 ],
                 avatarRules: [
                     v => v.length <= 100 || 'Avatar Url must be less than 100 characters',
